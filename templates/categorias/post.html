@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post</title>
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
+  </head>
+  <body>
+    <label for="check">
+      <img id="menu" src="{% static 'img/menu.png' %}" alt="Icone menu" />
+    </label>
+
+    <input type="checkbox" id="check" />
+
+    <header>
+      <div class="container">
+        <a href="#">
+          <h1>Blog Samio</h1>
+        </a>
+      </div>
+
+      <nav id="container-dropdown">
+        <ul>
+          <li>Python</li>
+          <li>Django</li>
+          <li>Tecnologia</li>
+          <li>Sistemas</li>
+
+          <form action="#">
+            <input class="pesquisa" type="search" placeholder="Pesquisar" />
+          </form>
+        </ul>
+      </nav>
+    </header>
+
+    <footer>
+      <p>&copy; | Desenvolvido por Samio Santos</p>
+    </footer>
+  </body>
+</html>

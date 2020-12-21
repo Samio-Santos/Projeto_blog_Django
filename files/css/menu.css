@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+label,
+#check {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+label {
+  padding: 15px;
+  position: absolute;
+  cursor: pointer;
+}
+
+img#menu {
+  width: 2rem;
+}
+
+/*Menu */
+header {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  align-content: center;
+  font-family: sans-serif;
+  background-color: #6d4a76;
+}
+
+.container h1 {
+  font-size: 25px;
+}
+
+.container a {
+  color: white;
+  text-decoration: none;
+}
+
+#container-dropdown {
+  display: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 17px;
+  width: 100%;
+}
+
+#container-dropdown ul {
+  margin-top: 1rem;
+}
+
+#container-dropdown li {
+  margin-bottom: 1rem;
+  list-style: none;
+  cursor: pointer;
+}
+
+#container-dropdown li:hover {
+  color: whitesmoke;
+}
+
+#container-dropdown form .pesquisa {
+  width: 50%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+input[type="checkbox"]:checked ~ header nav#container-dropdown,
+input[type="checkbox"]:checked ~ header {
+  height: 280px;
+  display: inline-block;
+}
+
+/* Rodape */
+
+footer {
+  position: relative;
+  bottom: 0;
+  padding: 10px;
+  width: 100%;
+  background-color: #6d4a76;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+}
+
+@media (min-width: 991px) {
+  input[type="checkbox"]:checked ~ header nav#container-dropdown,
+  input[type="checkbox"]:checked ~ header {
+    height: initial;
+  }
+
+  .container h1 {
+    min-width: 150px;
+  }
+
+  img#menu {
+    display: none;
+  }
+
+  #container-dropdown {
+    display: block;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  #container-dropdown ul {
+    position: absolute;
+    list-style: none;
+    right: 0;
+    top: 0;
+  }
+
+  #container-dropdown ul,
+  form {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-right: 10px;
+  }
+
+  #container-dropdown li {
+    display: inline-block;
+    padding: 5px;
+    padding-right: 30px;
+    margin: 2px;
+  }
+
+  #container-dropdown form .pesquisa {
+    width: 100%;
+  }
+}

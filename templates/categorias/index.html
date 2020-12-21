@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paginal Inicial</title>
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+  </head>
+  <body>
+    <label for="check">
+      <img id="menu" src="{% static 'img/menu.png' %}" alt="Icone menu" />
+    </label>
+
+    <input type="checkbox" id="check" />
+
+    <header>
+      <div class="container">
+        <a href="#">
+          <h1>Blog Samio</h1>
+        </a>
+      </div>
+
+      <nav id="container-dropdown">
+        <ul>
+          <li>Python</li>
+          <li>Django</li>
+          <li>Tecnologia</li>
+          <li>Sistemas</li>
+
+          <form action="#">
+            <input class="pesquisa" type="search" placeholder="Pesquisar" />
+          </form>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="container2">
+        <article class="flex-container">
+          <div class="cards">
+            <img src="{% static 'img/linux.jpg' %}" alt="My image" />
+            <h3>A wonderful serenity has taken possession of my entire soul</h3>
+            <p>
+              Nós fornecemos uma variedade de modelos para você sem nenhum
+              custo. Por favor, espalhar a palavra sobre Tooplate site.
+              Obrigada!
+            </p>
+            <span>hoje | 1 comentário | Tecnologia</span><br />
+            <a href="#">Ler mais...</a>
+          </div>
+
+          <div class="cards">
+            <img src="{% static 'img/linux_linux.jpg' %}" alt="My image" />
+            <h3>A wonderful serenity has taken possession of my entire soul</h3>
+            <p>
+              Nós fornecemos uma variedade de modelos para você sem nenhum
+              custo. Por favor, espalhar a palavra sobre Tooplate site.
+              Obrigada!
+            </p>
+            <span>hoje | 1 comentário | Tecnologia</span><br />
+            <a href="#">Ler mais...</a>
+          </div>
+
+          <div class="cards">
+            <img src="{% static 'img/linux_debian.jpg' %}" alt="My image" />
+            <h3>A wonderful serenity has taken possession of my entire soul</h3>
+            <p>
+              Nós fornecemos uma variedade de modelos para você sem nenhum
+              custo. Por favor, espalhar a palavra sobre Tooplate site.
+              Obrigada!
+            </p>
+            <span>hoje | 1 comentário | Tecnologia</span><br />
+            <a href="#">Ler mais...</a>
+          </div>
+
+          <div class="cards">
+            <img src="{% static 'img/linux_linux_mint.jpg' %}" alt="My image" />
+            <h3>A wonderful serenity has taken possession of my entire soul</h3>
+            <p>
+              Nós fornecemos uma variedade de modelos para você sem nenhum
+              custo. Por favor, espalhar a palavra sobre Tooplate site.
+              Obrigada!
+            </p>
+            <span>hoje | 1 comentário | Tecnologia</span><br />
+            <a href="#">Ler mais...</a>
+          </div>
+
+          <div class="cards">
+            <img src="{% static 'img/linux.jpg' %}" alt="My image" />
+            <h3>A wonderful serenity has taken possession of my entire soul</h3>
+            <p>
+              Nós fornecemos uma variedade de modelos para você sem nenhum
+              custo. Por favor, espalhar a palavra sobre Tooplate site.
+              Obrigada!
+            </p>
+            <span>hoje | 1 comentário | Tecnologia</span><br />
+            <a href="#">Ler mais...</a>
+          </div>
+
+          <div class="cards">
+            <img src="{% static 'img/linux_linux.jpg' %}" alt="My image" />
+            <h3>A wonderful serenity has taken possession of my entire soul</h3>
+            <p>
+              Nós fornecemos uma variedade de modelos para você sem nenhum
+              custo. Por favor, espalhar a palavra sobre Tooplate site.
+              Obrigada!
+            </p>
+            <span>hoje | 1 comentário | Tecnologia</span><br />
+            <a href="#">Ler mais...</a>
+          </div>
+
+          <div class="cards">
+            <img src="{% static 'img/linux_debian.jpg' %}" alt="My image" />
+            <h3>A wonderful serenity has taken possession of my entire soul</h3>
+            <p>
+              Nós fornecemos uma variedade de modelos para você sem nenhum
+              custo. Por favor, espalhar a palavra sobre Tooplate site.
+              Obrigada!
+            </p>
+            <span>hoje | 1 comentário | Tecnologia</span><br />
+            <a href="#">Ler mais...</a>
+          </div>
+
+          <div class="cards">
+            <img src="{% static 'img/linux_linux_mint.jpg' %}" alt="My image" />
+            <h3>A wonderful serenity has taken possession of my entire soul</h3>
+            <p>
+              Nós fornecemos uma variedade de modelos para você sem nenhum
+              custo. Por favor, espalhar a palavra sobre Tooplate site.
+              Obrigada!
+            </p>
+            <span>hoje | 1 comentário | Tecnologia</span><br />
+            <a href="#">Ler mais...</a>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; | Desenvolvido por Samio Santos</p>
+    </footer>
+  </body>
+</html>
