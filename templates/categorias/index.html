@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
   </head>
   <body>
-    <label for="check">
-      <img id="menu" src="{% static 'img/menu.png' %}" alt="Icone menu" />
-    </label>
+    <div class="menu-block">
+      <label for="check">
+        <img id="menu" src="{% static 'img/menu.png' %}" alt="Icone menu" />
+      </label>
+    </div>
 
     <input type="checkbox" id="check" />
-
     <header>
       <div class="container">
         <a href="#">
@@ -29,8 +30,13 @@
           <li>Tecnologia</li>
           <li>Sistemas</li>
 
-          <form action="#">
-            <input class="pesquisa" type="search" placeholder="Pesquisar" />
+          <form class="box-form"action="#">
+            <input
+              id="label"
+              class="pesquisa"
+              type="search"
+              placeholder="Pesquisar"
+            />
           </form>
         </ul>
       </nav>

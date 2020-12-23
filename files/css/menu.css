@@ -8,14 +8,14 @@ input[type="checkbox"] {
   display: none;
 }
 
-label,
+.menu-block label,
 #check {
   position: absolute;
   right: 0;
   top: 0;
 }
 
-label {
+.menu-block label {
   padding: 15px;
   position: absolute;
   cursor: pointer;
@@ -65,7 +65,7 @@ header {
   color: whitesmoke;
 }
 
-#container-dropdown form .pesquisa {
+#container-dropdown .box-form .pesquisa {
   width: 50%;
   padding: 10px;
   border: none;
@@ -84,7 +84,7 @@ input[type="checkbox"]:checked ~ header {
 footer {
   position: relative;
   bottom: 0;
-  padding: 10px;
+  padding: 20px;
   width: 100%;
   background-color: #6d4a76;
   color: white;
@@ -119,7 +119,7 @@ footer {
   }
 
   #container-dropdown ul,
-  form {
+  .box-form {
     display: flex;
     align-content: center;
     justify-content: center;
@@ -133,7 +133,9 @@ footer {
     margin: 2px;
   }
 
-  #container-dropdown form .pesquisa {
+  #container-dropdown .box-form .pesquisa {
     width: 100%;
   }
+
+
 }

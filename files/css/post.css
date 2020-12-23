@@ -1,0 +1,130 @@
+.box-container {
+  width: 100%;
+  font-family: sans-serif;
+  margin: 0 auto;
+}
+.cards {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.cards h2 {
+  margin-top: 2rem;
+  font-size: 2rem;
+}
+
+.cards h5 {
+  font-size: 1rem;
+  margin-top: 2rem;
+  line-height: 1.5;
+}
+
+.cards small {
+  margin-top: 1rem;
+  color: #6c757d;
+}
+.cards img {
+  margin-top: 4rem;
+  width: 100%;
+}
+
+.cards p {
+  text-align: justify;
+  margin-top: 3rem;
+  line-height: 2.5;
+  font-size: 16px;
+}
+
+.comments {
+  margin: 20px;
+  margin-top: 4rem;
+}
+
+.comments h4 {
+  margin-top: 2rem;
+  /* margin-bottom: 1rem; */
+}
+
+.comments small {
+  line-height: 2.6;
+  color: #6c757d;
+}
+
+.comments p {
+  text-align: justify;
+  line-height: 1.5;
+  margin-bottom: 5rem;
+}
+
+.contact {
+  margin: 20px;
+}
+
+.contact h1 {
+  margin-bottom: 1rem;
+  font-size: 30px;
+}
+
+.contact .box-input {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #dee2e6;
+}
+
+.contact .box-input label,
+.box-input input,
+.box-input textarea {
+  margin-top: 10px;
+}
+
+.contact .box-input input,
+textarea {
+  width: 50%;
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.404);
+  border-radius: 3px;
+  outline: none;
+  margin-bottom: 1rem;
+  resize: horizontal;
+}
+
+.box-input input:focus,
+textarea:focus {
+  border: 1.5px solid #6d4a76;
+}
+
+form button {
+  width: 20%;
+  padding: 10px;
+  border-radius: 3px;
+  border: none;
+  background-color: #6d4a76;
+  color: white;
+  cursor: pointer;
+  transition: 1s;
+  margin-bottom: 4rem;
+}
+
+form button:hover {
+  background-color: #370344;
+}
+
+
+@media(min-width: 700px) {
+  .box-container {
+    width: 60%;
+  }
+  
+  .contact .box-input input,
+  textarea {
+    width: 60%;
+  }
+
+  .cards img {
+    height: auto;
+  }
+
+}
