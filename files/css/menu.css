@@ -46,7 +46,6 @@ header {
 
 #container-dropdown {
   display: none;
-  color: rgba(255, 255, 255, 0.5);
   font-size: 17px;
   width: 100%;
 }
@@ -61,7 +60,12 @@ header {
   cursor: pointer;
 }
 
-#container-dropdown li:hover {
+#container-dropdown li a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+}
+
+#container-dropdown li a:hover {
   color: whitesmoke;
 }
 

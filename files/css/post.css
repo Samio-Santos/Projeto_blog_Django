@@ -88,7 +88,7 @@ textarea {
   border-radius: 3px;
   outline: none;
   margin-bottom: 1rem;
-  resize: horizontal;
+  resize: vertical;
 }
 
 .box-input input:focus,

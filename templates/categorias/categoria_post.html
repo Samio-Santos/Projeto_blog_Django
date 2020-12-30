@@ -1,0 +1,98 @@
+{% load static %} {% load humanize %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paginal Inicial</title>
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+  </head>
+  <body>
+    <div class="menu-block">
+      <label for="check">
+        <img id="menu" src="{% static 'img/menu.png' %}" alt="Icone menu" />
+      </label>
+    </div>
+
+    <input type="checkbox" id="check" />
+    <header>
+      <div class="container">
+        <a href="{% url 'index' %}">
+          <h1>Blog Samio</h1>
+        </a>
+      </div>
+
+      <nav id="container-dropdown">
+        <ul>
+          <li><a href="{% url 'post_categoria' 'python' %}">Python</a></li>
+          <li><a href="{% url 'post_categoria' 'django' %}">Django</a></li>
+          <li><a href="{% url 'post_categoria' 'tecnologia' %}">Tecnologia</a></li>
+          <li><a href="{% url 'post_categoria' 'sistemas' %}">Sistemas</a></li>
+
+          <form class="box-form" action="#">
+            <input
+              id="label"
+              class="pesquisa"
+              name="termo"
+              value="{{ request.GET.termo}}"
+              type="search"
+              placeholder="Pesquisar"
+            />
+          </form>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="container2">
+        <article class="flex-container">
+          {% for post in posts %} 
+            {% if post.publicado_post %}
+              <div class="cards">
+                {% if post.imagem_post %}
+                  <img src="{{ post.imagem_post.url }}" alt="My image" />
+                {% endif %}
+                <a href="{% url 'post_detalhe' post.id %}"
+                  ><h3>{{ post.titulo_post }}</h3></a
+                >
+                <p>{{post.resumo_post}}</p>
+                <span
+                  >{{post.data_post|naturalday}} | {{ post.comentarios_set.count }}
+                  | {{ post.categoria_post }}</span
+                ><br />
+                <a href="{% url 'post_detalhe' post.id %}" class="button"
+                  >Ler mais...</a
+                >
+              </div>
+            {% endif %}
+          {% endfor %}
+        </article>
+      </section>
+      <ul class="pagination">
+        {% for paginas in posts.paginator.page_range %} 
+          {% if posts.number == paginas %}
+            <li>
+              <a
+                class="active"
+                href="?p={{ paginas }}&termo={{ request.GET.termo }}"
+                >{{ paginas }}</a
+              >
+            </li>
+
+          {% else %}
+            <li>
+              <a href="?p={{ paginas }}&termo={{ request.GET.termo }}"
+                >{{ paginas }}</a
+              >
+            </li>
+
+          {% endif %} 
+        {% endfor %}
+      </ul>
+    </main>
+
+    <footer>
+      <p>&copy; | Desenvolvido por Samio Santos</p>
+    </footer>
+  </body>
+</html>

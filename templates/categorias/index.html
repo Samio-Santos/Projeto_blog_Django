@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} {% load humanize %}
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -18,22 +18,24 @@
     <input type="checkbox" id="check" />
     <header>
       <div class="container">
-        <a href="#">
+        <a href="{% url 'index' %}">
           <h1>Blog Samio</h1>
         </a>
       </div>
 
       <nav id="container-dropdown">
         <ul>
-          <li>Python</li>
-          <li>Django</li>
-          <li>Tecnologia</li>
-          <li>Sistemas</li>
+          <li><a href="{% url 'post_categoria' 'python' %}">Python</a></li>
+          <li><a href="{% url 'post_categoria' 'django' %}">Django</a></li>
+          <li><a href="{% url 'post_categoria' 'tecnologia' %}">Tecnologia</a></li>
+          <li><a href="{% url 'post_categoria' 'sistemas' %}">Sistemas</a></li>
 
-          <form class="box-form"action="#">
+          <form class="box-form" action="#">
             <input
               id="label"
               class="pesquisa"
+              name="termo"
+              value="{{ request.GET.termo }}"
               type="search"
               placeholder="Pesquisar"
             />
@@ -44,103 +46,47 @@
     <main>
       <section class="container2">
         <article class="flex-container">
+          {% for post in posts %} {% if post.publicado_post %}
           <div class="cards">
-            <img src="{% static 'img/linux.jpg' %}" alt="My image" />
-            <h3>A wonderful serenity has taken possession of my entire soul</h3>
-            <p>
-              Nós fornecemos uma variedade de modelos para você sem nenhum
-              custo. Por favor, espalhar a palavra sobre Tooplate site.
-              Obrigada!
-            </p>
-            <span>hoje | 1 comentário | Tecnologia</span><br />
-            <a href="#">Ler mais...</a>
+            {% if post.imagem_post %}
+            <img src="{{ post.imagem_post.url }}" alt="My image" />
+            {% endif %}
+            <a href="{% url 'post_detalhe' post.id %}"
+              ><h3>{{ post.titulo_post }}</h3></a
+            >
+            <p>{{post.resumo_post}}</p>
+            <span
+              >{{post.data_post|naturalday}} | {{ post.comentarios_set.count }}
+              | {{ post.categoria_post }}</span
+            ><br />
+            <a href="{% url 'post_detalhe' post.id %}" class="button"
+              >Ler mais...</a
+            >
           </div>
-
-          <div class="cards">
-            <img src="{% static 'img/linux_linux.jpg' %}" alt="My image" />
-            <h3>A wonderful serenity has taken possession of my entire soul</h3>
-            <p>
-              Nós fornecemos uma variedade de modelos para você sem nenhum
-              custo. Por favor, espalhar a palavra sobre Tooplate site.
-              Obrigada!
-            </p>
-            <span>hoje | 1 comentário | Tecnologia</span><br />
-            <a href="#">Ler mais...</a>
-          </div>
-
-          <div class="cards">
-            <img src="{% static 'img/linux_debian.jpg' %}" alt="My image" />
-            <h3>A wonderful serenity has taken possession of my entire soul</h3>
-            <p>
-              Nós fornecemos uma variedade de modelos para você sem nenhum
-              custo. Por favor, espalhar a palavra sobre Tooplate site.
-              Obrigada!
-            </p>
-            <span>hoje | 1 comentário | Tecnologia</span><br />
-            <a href="#">Ler mais...</a>
-          </div>
-
-          <div class="cards">
-            <img src="{% static 'img/linux_linux_mint.jpg' %}" alt="My image" />
-            <h3>A wonderful serenity has taken possession of my entire soul</h3>
-            <p>
-              Nós fornecemos uma variedade de modelos para você sem nenhum
-              custo. Por favor, espalhar a palavra sobre Tooplate site.
-              Obrigada!
-            </p>
-            <span>hoje | 1 comentário | Tecnologia</span><br />
-            <a href="#">Ler mais...</a>
-          </div>
-
-          <div class="cards">
-            <img src="{% static 'img/linux.jpg' %}" alt="My image" />
-            <h3>A wonderful serenity has taken possession of my entire soul</h3>
-            <p>
-              Nós fornecemos uma variedade de modelos para você sem nenhum
-              custo. Por favor, espalhar a palavra sobre Tooplate site.
-              Obrigada!
-            </p>
-            <span>hoje | 1 comentário | Tecnologia</span><br />
-            <a href="#">Ler mais...</a>
-          </div>
-
-          <div class="cards">
-            <img src="{% static 'img/linux_linux.jpg' %}" alt="My image" />
-            <h3>A wonderful serenity has taken possession of my entire soul</h3>
-            <p>
-              Nós fornecemos uma variedade de modelos para você sem nenhum
-              custo. Por favor, espalhar a palavra sobre Tooplate site.
-              Obrigada!
-            </p>
-            <span>hoje | 1 comentário | Tecnologia</span><br />
-            <a href="#">Ler mais...</a>
-          </div>
-
-          <div class="cards">
-            <img src="{% static 'img/linux_debian.jpg' %}" alt="My image" />
-            <h3>A wonderful serenity has taken possession of my entire soul</h3>
-            <p>
-              Nós fornecemos uma variedade de modelos para você sem nenhum
-              custo. Por favor, espalhar a palavra sobre Tooplate site.
-              Obrigada!
-            </p>
-            <span>hoje | 1 comentário | Tecnologia</span><br />
-            <a href="#">Ler mais...</a>
-          </div>
-
-          <div class="cards">
-            <img src="{% static 'img/linux_linux_mint.jpg' %}" alt="My image" />
-            <h3>A wonderful serenity has taken possession of my entire soul</h3>
-            <p>
-              Nós fornecemos uma variedade de modelos para você sem nenhum
-              custo. Por favor, espalhar a palavra sobre Tooplate site.
-              Obrigada!
-            </p>
-            <span>hoje | 1 comentário | Tecnologia</span><br />
-            <a href="#">Ler mais...</a>
-          </div>
+          {% endif %} {% endfor %}
         </article>
       </section>
+      <ul class="pagination">
+        {% for paginas in posts.paginator.page_range %} 
+          {% if posts.number == paginas %}
+            <li>
+              <a
+                class="active"
+                href="?p={{ paginas }}&termo={{ request.GET.termo }}"
+                >{{ paginas }}</a
+              >
+            </li>
+
+          {% else %}
+            <li>
+              <a href="?p={{ paginas }}&termo={{ request.GET.termo }}"
+                >{{ paginas }}</a
+              >
+            </li>
+
+          {% endif %} 
+        {% endfor %}
+      </ul>
     </main>
 
     <footer>

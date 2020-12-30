@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'post',
+    'comentarios',
     'categorias',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+    'django.contrib.humanize',
+] 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -79,7 +82,7 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Blog_Django',
+        'NAME': 'blog_django',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'USER': 'root',
@@ -134,7 +137,7 @@ STATICFILES_DIRS = [
 
 # Para o usuario poder adicionar mídias, fazer as configurações abaixo.
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join (BASE_DIR, 'midias')
+MEDIA_ROOT = os.path.join (BASE_DIR, 'midias/')
 
 # Messages
 # Os alertas vão na classe da tag no template
@@ -145,3 +148,6 @@ MESSAGE_TAGS = {
     constants.ERROR: 'alert-error',
     constants.DEBUG: 'alert-info',
 }
+
+INSTALLED_APPS += ('django_summernote',)
+X_FRAME_OPTIONS = 'SAMEORIGIN'

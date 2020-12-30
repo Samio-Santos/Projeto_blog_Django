@@ -16,7 +16,7 @@
 }
 
 .cards {
-  height: 33rem;
+  height: 100vh;
   border: 0.3px solid #6c757d;
   border-radius: 4px;
   word-wrap: break-word;
@@ -29,6 +29,18 @@
 
 .cards img {
   width: 100%;
+  height: 50vh;
+  object-fit: fill;
+}
+
+.cards a {
+  text-decoration: none;
+}
+
+.cards h3 {
+  color: #6d4a76;
+  word-wrap: break-word;
+  transition: 1s;
 }
 
 .cards h3,
@@ -38,11 +50,16 @@ span {
   margin-bottom: 20px;
 }
 
+.cards h3:hover {
+  color: black;
+  text-decoration: underline;
+}
+
 .cards span {
   color: #6c757d;
 }
 
-.cards a {
+.cards .button {
   color: #3ca9a1;
   position: absolute;
   border-radius: 4px;
@@ -59,6 +76,38 @@ span {
 .cards a:hover {
   background-color: #3ca9a1;
   color: white;
+}
+
+ul.pagination {
+  display: inline-block;
+  padding: 10px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ul.pagination li {
+  display: inline;
+}
+
+ul.pagination li a {
+  color: black;
+  float: left;
+  margin: 5px;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+ul.pagination li a.active {
+  background-color: #6d4a76;
+  color: white;
+  border-radius: 5px;
+}
+
+ul.pagination li a:hover {
+  background-color: #ddd;
 }
 
 @media (min-width: 700px) {
