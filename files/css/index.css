@@ -24,7 +24,7 @@
   margin-bottom: 20px;
   position: relative;
   flex: 0 0 85%; /* define se os cards ficam na mesma linha */
-  /* text-align: center; */
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.185);
 }
 
 .cards img {
