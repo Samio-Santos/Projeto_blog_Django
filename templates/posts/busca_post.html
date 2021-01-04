@@ -1,10 +1,11 @@
-{% load static %} {% load humanize %}
+{% load static %} 
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Paginal Inicial</title>
+    <title>Busca </title>
     <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
   </head>
@@ -27,7 +28,9 @@
         <ul>
           <li><a href="{% url 'post_categoria' 'python' %}">Python</a></li>
           <li><a href="{% url 'post_categoria' 'django' %}">Django</a></li>
-          <li><a href="{% url 'post_categoria' 'tecnologia' %}">Tecnologia</a></li>
+          <li>
+            <a href="{% url 'post_categoria' 'tecnologia' %}">Tecnologia</a>
+          </li>
           <li><a href="{% url 'post_categoria' 'sistemas' %}">Sistemas</a></li>
 
           <form class="box-form" action="{% url 'busca_post' %}">
@@ -47,7 +50,7 @@
     <main>
       <section class="container2">
         <article class="flex-container">
-          {% if posts %}
+          {% if posts %} 
             {% for post in posts %} 
               {% if post.publicado_post %}
                 <div class="cards">
@@ -68,45 +71,40 @@
                 </div>
               {% else %}
                 <small>Nem um post "{{ request.GET.termo }}" encontrado!</small>
-              {% endif %}
-            {% endfor %}
-            
+              {% endif %} 
+            {% endfor %} 
+
           {% else %}
-                <small>Nem um post "{{ request.GET.termo }}" encontrado!</small>
+            <small>Nem um post "{{ request.GET.termo }}" encontrado!</small>
           {% endif %}
         </article>
       </section>
 
-      {% if messages %}
+      {% if messages %} 
         {% for message in messages %}
-          <div class="{{ message.tags }}" role="alert">
-            {{ message }}
-          </div>
-        {% endfor %}
-      {% endif %}
-      
-      {% if posts %}
-        <ul class="pagination">
-          {% for paginas in posts.paginator.page_range %} 
-            {% if posts.number == paginas %}
-              <li>
-                <a
-                  class="active"
-                  href="?p={{ paginas }}&termo={{ request.GET.termo }}"
-                  >{{ paginas }}</a
-                >
-              </li>
+          <div class="{{ message.tags }}" role="alert">{{ message }}</div>
+        {% endfor %} {% endif %} {% if posts %}
+      <ul class="pagination">
+        {% for paginas in posts.paginator.page_range %} 
+          {% if posts.number == paginas %}
+            <li>
+              <a
+                class="active"
+                href="?p={{ paginas }}&termo={{ request.GET.termo }}"
+                >{{ paginas }}</a
+              >
+            </li>
 
             {% else %}
-              <li>
-                <a href="?p={{ paginas }}&termo={{ request.GET.termo }}"
-                  >{{ paginas }}</a
-                >
-              </li>
+            <li>
+              <a href="?p={{ paginas }}&termo={{ request.GET.termo }}"
+                >{{ paginas }}</a
+              >
+            </li>
 
-            {% endif %} 
-          {% endfor %}
-        </ul>
+          {% endif %} 
+        {% endfor %}
+      </ul>
       {% endif %}
     </main>
 
