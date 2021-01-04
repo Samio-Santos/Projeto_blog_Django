@@ -1,10 +1,11 @@
-{% load static %} {% load humanize %}
+{% load static %} 
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Paginal Inicial</title>
+    <title>Categorias</title>
     <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
   </head>
@@ -30,7 +31,7 @@
           <li><a href="{% url 'post_categoria' 'tecnologia' %}">Tecnologia</a></li>
           <li><a href="{% url 'post_categoria' 'sistemas' %}">Sistemas</a></li>
 
-          <form class="box-form" action="#">
+          <form class="box-form" action="{% url 'busca_post' %}">
             <input
               id="label"
               class="pesquisa"
@@ -38,6 +39,7 @@
               value="{{ request.GET.termo}}"
               type="search"
               placeholder="Pesquisar"
+              minlength="3"
             />
           </form>
         </ul>

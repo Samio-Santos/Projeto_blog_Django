@@ -30,13 +30,14 @@
           <li><a href="{% url 'post_categoria' 'tecnologia' %}">Tecnologia</a></li>
           <li><a href="{% url 'post_categoria' 'sistemas' %}">Sistemas</a></li>
 
-          <form class="box-form" action="#">
+          <form class="box-form" action="{% url 'busca_post' %}">
             <input
               id="label"
               class="pesquisa"
               name="termo"
               value="{{ request.GET.termo }}"
               type="search"
+              minlength="3"
               placeholder="Pesquisar"
             />
           </form>
@@ -45,7 +46,15 @@
     </header>
     <main>
       <section class="container2">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="{{ message.tags }}" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
         <article class="flex-container">
+
           {% for post in posts %} {% if post.publicado_post %}
           <div class="cards">
             {% if post.imagem_post %}

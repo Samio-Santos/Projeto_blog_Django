@@ -30,7 +30,7 @@
           <li><a href="{% url 'post_categoria' 'tecnologia' %}">Tecnologia</a></li>
           <li><a href="{% url 'post_categoria' 'sistemas' %}">Sistemas</a></li>
 
-          <form class="box-form" action="#">
+          <form class="box-form" action="{% url 'busca_post' %}">
             <input
               id="label"
               class="pesquisa"

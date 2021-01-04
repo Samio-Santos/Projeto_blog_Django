@@ -10,7 +10,7 @@ import os
 
 class Post(models.Model):
     titulo_post = models.CharField(max_length=150)
-    autor_post =  models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    autor_post = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     data_post = models.DateTimeField(default=timezone.now)
     conteudo_post = models.TextField()
     resumo_post = models.TextField()
