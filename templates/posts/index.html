@@ -55,47 +55,61 @@
           {% endfor %}
         {% endif %}
         <article class="flex-container">
-
-          {% for post in posts %} {% if post.publicado_post %}
-          <div class="cards">
-            {% if post.imagem_post %}
-            <img src="{{ post.imagem_post.url }}" alt="My image" />
-            {% endif %}
-            <a href="{% url 'post_detalhe' post.id %}"
-              ><h3>{{ post.titulo_post }}</h3></a
-            >
-            <p>{{post.resumo_post}}</p>
-            <span
-              >{{post.data_post|naturalday}} | {{ post.comentarios_set.count }}
-              | {{ post.categoria_post }}</span
-            ><br />
-            <a href="{% url 'post_detalhe' post.id %}" class="button"
-              >Ler mais...</a
-            >
-          </div>
-          {% endif %} {% endfor %}
+          {% for post in posts %} 
+            {% if post.publicado_post %}
+            <div class="cards">
+              {% if post.imagem_post %}
+              <img src="{{ post.imagem_post.url }}" alt="My image" />
+              {% endif %}
+              <a href="{% url 'post_detalhe' post.id %}">
+                <h3>{{ post.titulo_post }}</h3>
+              </a>
+              <p>{{post.resumo_post}}</p>
+              <span>
+                {{post.data_post|naturalday}} | {{ post.numero_comentarios }} Comentários
+                | {{ post.categoria_post }}
+              </span><br />
+              <a href="{% url 'post_detalhe' post.id %}" class="button">Ler mais...</a>
+            </div>
+            {% endif %} 
+          {% endfor %}
         </article>
       </section>
       <ul class="pagination">
+        {% if posts.has_previous %}
+        <li>
+          <a id="next" href="?p=1">&laquo;</a>
+        </li>
+
+        <li>
+          <a id="next" href="?p={{ posts.previous_page_number }}">&lsaquo;</a>
+        </li>
+      {% endif %}
         {% for paginas in posts.paginator.page_range %} 
           {% if posts.number == paginas %}
             <li>
               <a
                 class="active"
-                href="?p={{ paginas }}&termo={{ request.GET.termo }}"
-                >{{ paginas }}</a
-              >
+                href="?p={{ paginas }}&termo={{ request.GET.termo }}">{{ paginas }}</a>
             </li>
 
-          {% else %}
+          {% elif paginas > posts.number|add:'-3' and paginas < posts.number|add:'3' %}
             <li>
-              <a href="?p={{ paginas }}&termo={{ request.GET.termo }}"
-                >{{ paginas }}</a
-              >
+              <a href="?p={{ paginas }}&termo={{ request.GET.termo }}">{{ paginas }}</a>
             </li>
 
           {% endif %} 
         {% endfor %}
+
+        {% if posts.has_next %}
+          <li>
+            <a id="next" href="?p={{ posts.next_page_number }}">&rsaquo;</a>
+          </li>
+
+          <li>
+            <a id="next" href="?p={{ posts.paginator.num_pages }}">&raquo;</a>
+          </li>
+        {% endif %}
       </ul>
     </main>
 

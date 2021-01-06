@@ -27,14 +27,8 @@
 }
 .cards img {
   margin-top: 4rem;
+  margin-bottom: 1rem;
   width: 100%;
-}
-
-.cards p {
-  text-align: justify;
-  margin-top: 3rem;
-  line-height: 2.5;
-  font-size: 16px;
 }
 
 .comments {
@@ -44,7 +38,6 @@
 
 .comments h4 {
   margin-top: 2rem;
-  /* margin-bottom: 1rem; */
 }
 
 .comments small {
@@ -112,12 +105,22 @@ form button:hover {
   background-color: #370344;
 }
 
+.alert-success {
+  text-align: center;
+  background-color: rgba(0, 128, 0, 0.233);
+  color: green;
+  width: 100%;
+  margin-left: 0.5rem;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 3rem;
+}
 
-@media(min-width: 700px) {
+@media (min-width: 700px) {
   .box-container {
     width: 60%;
   }
-  
+
   .contact .box-input input,
   textarea {
     width: 60%;
@@ -126,5 +129,4 @@ form button:hover {
   .cards img {
     height: auto;
   }
-
 }

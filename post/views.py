@@ -1,33 +1,55 @@
 from django.shortcuts import render,get_object_or_404, redirect
 from post.models import Post
+from comentarios.models import Comentarios
 from django.http import Http404
 from django.core.paginator import Paginator
-from django.db.models import Q
+from django.db.models import Q, Case, Count, When
 from django.contrib import messages
+from comentarios.forms import FormComentario
 
-
-# Create your views here.
 
 def index(request):
     data = {}
-    post = Post.objects.order_by('-id')
+    post = Post.objects.order_by('-id').annotate(
+        numero_comentarios=Count(
+            Case(
+                When(comentarios__publicado_comentario=True, then=1)
+            )
+        )
+    )
 
-    paginator = Paginator(post, 2)
+    paginator = Paginator(post, 4)
     page = request.GET.get('p')
     post = paginator.get_page(page)
 
     data['posts'] = post
+    
     return render(request, 'posts/index.html', data)
 
 def post(request, id):
     data = {}
 
     post = get_object_or_404(Post, id=id)
+    form = FormComentario(request.POST or None)
+    comments = Comentarios.objects.filter(
+        publicado_comentario=True,
+        post_comentario=post
+    )
 
     if not post.publicado_post:
         raise Http404()
-    
+
+    if request.method == 'POST':
+        if form.is_valid():
+            comentario = Comentarios(**form.cleaned_data)
+            comentario.post_comentario = post
+            comentario.save()
+            messages.success(request, 'Comentário enviado com sucesso!')
+            return redirect('post_detalhe', id=post.id)
+
     data['post'] = post
+    data['form'] = form
+    data['comments'] = comments
 
     return render(request, 'posts/post.html', data)
 
@@ -36,7 +58,7 @@ def post_categoria(request, categoria):
     data = {}
     post = Post.objects.order_by('-id').filter(categoria_post__nome_cat__iexact=categoria)
 
-    paginator = Paginator(post, 2)
+    paginator = Paginator(post, 4)
     page = request.GET.get('p')
     post = paginator.get_page(page)
 

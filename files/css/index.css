@@ -100,7 +100,9 @@ ul.pagination li {
   display: inline;
 }
 
-ul.pagination li a {
+ul.pagination li a,
+a#before,
+a#next {
   color: black;
   float: left;
   margin: 5px;
@@ -115,7 +117,9 @@ ul.pagination li a.active {
   border-radius: 5px;
 }
 
-ul.pagination li a:hover {
+ul.pagination li a:hover,
+a#before:hover,
+a#next:hover {
   background-color: #ddd;
 }
 
