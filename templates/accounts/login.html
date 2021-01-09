@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
+    <link rel="stylesheet" href="{% static 'css_accounts/login.css' %}" />
+
+    <link
+      href="{% static 'fontawesome-free-5.13.0-web/css/fontawesome.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'fontawesome-free-5.13.0-web/css/brands.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'fontawesome-free-5.13.0-web/css/solid.css' %}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <input type="checkbox" id="check" />
+    <header>
+      <div class="container">
+        <a href="{% url 'index' %}">
+          <h1>Blog Samio</h1>
+          <img id="icone-login" src="{% static 'img/user.png' %}" alt="" />
+        </a>
+      </div>
+    </header>
+    <main>
+      <form action="{% url 'login' %}" method="POST" name="form-login">
+        <fieldset>
+          <div class="input-block">
+            <label for="user">Login:</label><br />
+            <i class="fas fa-user-circle"></i>
+            <input type="text" name="user" id="user" placeholder="User" />
+          </div>
+
+          <div class="input-block">
+            <label for="password">Senha:</label><br />
+            <i id="senha" class="fas fa-lock"></i>
+            <input type="password" name="password" id="password" placeholder="Password" />
+          </div>
+        </fieldset>
+        <button type="submit">Entrar</button>
+      </form>
+    </main>
+  </body>
+</html>

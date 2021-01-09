@@ -56,8 +56,9 @@
 p,
 span {
   margin: 1rem;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
+
 
 .cards h3:hover {
   color: black;
@@ -134,7 +135,7 @@ a#next:hover {
 
 @media (min-width: 700px) {
   .container2 {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
   }
   .flex-container small {

@@ -47,6 +47,14 @@
     <main>
       <section class="box-container">
         <div class="cards">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="{{ message.tags }}" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+
           <h2>{{ post.titulo_post }}</h2>
           <h5>{{ post.resumo_post }}</h5>
           <small>{{ post.autor_post }} | {{ post.data_post }} | {{post.categoria_post }}</small>
@@ -60,24 +68,25 @@
         <div class="comments">
           <h1>Comentários ({{ comments.count}})</h1>
           {% for comment in comments %}
-          <h4>{{comment.nome}} disse:</h4>
-          <small>{{comment.data_comentario|naturalday}}</small>
-          <p>
-            {{comment.comentario}}
-          </p>
+            <div class="item">
+              <h4>{{comment.nome}} disse:</h4>
+              <small>{{comment.data_comentario|naturalday}}</small>
+              <p>
+                {{comment.comentario}}
+              </p>
+              <!-- <form action="#" method="POST">
+                <div>
+                  <textarea id="item-text" cols="30" rows="10" placeholder="Responder {{comment.nome}}"></textarea>
+                </div>
+                <button type="submit" id="button-comments">Enviar</button>
+              </form>  -->
+            </div>
           {% endfor %}
         </div>
         {% endif %}
 
         <div class="contact">
           <h1>Deixe um comentário</h1>
-          {% if messages %}
-            {% for message in messages %}
-              <div class="{{ message.tags }}" role="alert">
-                {{ message }}
-              </div>
-            {% endfor %}
-          {% endif %}
           <form action="#enviar_comentario" method="POST">
             {% csrf_token %}
             <div class="box-input">

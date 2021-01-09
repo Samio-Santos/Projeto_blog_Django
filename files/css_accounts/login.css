@@ -1,0 +1,61 @@
+form {
+  font-family: sans-serif;
+}
+
+fieldset {
+  border: none;
+  padding: 1rem;
+  margin-top: 15vh;
+}
+
+.input-block {
+  margin-bottom: 1rem;
+}
+
+.input-block label {
+  font-weight: bold;
+  position: relative;
+  bottom: 0.5rem;
+}
+.input-block input {
+  width: 80%;
+  outline: none;
+  padding: 9px;
+  border-radius: 3px;
+  border: 0.5px solid black;
+}
+
+.input-block input:focus {
+  border: 1.5px solid #6d4a76;
+}
+
+form button {
+  width: 25%;
+  padding: 10px;
+  border-radius: 3px;
+  border: none;
+  background-color: #6d4a76;
+  color: white;
+  cursor: pointer;
+  transition: 1s;
+  margin: 1rem;
+}
+
+form button:hover {
+  background-color: #370344;
+}
+
+form i {
+  position: absolute;
+  left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+form .input-block input[type=text], input[type=password]{
+    padding-left: 30px;
+
+}
+
+::-webkit-input-placeholder {
+    color: #6d4a76;
+}

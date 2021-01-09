@@ -36,19 +36,39 @@
   margin-top: 4rem;
 }
 
-.comments h4 {
-  margin-top: 2rem;
+.comments .item {
+  background-color: #ffffff;
+  border: 1px solid #e6e6f0;
+  border-radius: 0.4rem;
+  margin-top: 2.4rem;
+}
+
+.comments .item h4,
+small,
+.item p,
+#item-text,
+.item #button-comments {
+  margin: 0.7rem;
+}
+
+.comments .item #button-comments {
+  width: 10%;
+}
+
+.comments .item #item-text {
+  width: 90%;
+  height: 3rem;
 }
 
 .comments small {
-  line-height: 2.6;
+  line-height: 1;
   color: #6c757d;
 }
 
 .comments p {
   text-align: justify;
   line-height: 1.5;
-  margin-bottom: 5rem;
+  margin-bottom: 1rem;
 }
 
 .contact {
@@ -56,6 +76,7 @@
 }
 
 .contact h1 {
+  margin-top: 3rem;
   margin-bottom: 1rem;
   font-size: 30px;
 }

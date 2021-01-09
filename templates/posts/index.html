@@ -30,18 +30,10 @@
           <li><a href="{% url 'post_categoria' 'django' %}">Django</a></li>
           <li><a href="{% url 'post_categoria' 'tecnologia' %}">Tecnologia</a></li>
           <li><a href="{% url 'post_categoria' 'sistemas' %}">Sistemas</a></li>
+          <li id="login"><a href="{% url 'login' %}">Login</a></li>
+          <li id="register"><a href="#">Cadastrar</a></li>
 
-          <form class="box-form" action="{% url 'busca_post' %}">
-            <input
-              id="label"
-              class="pesquisa"
-              name="termo"
-              value="{{ request.GET.termo }}"
-              type="search"
-              minlength="3"
-              placeholder="Pesquisar"
-            />
-          </form>
+         
         </ul>
       </nav>
     </header>
@@ -66,8 +58,7 @@
               </a>
               <p>{{post.resumo_post}}</p>
               <span>
-                {{post.data_post|naturalday}} | {{ post.numero_comentarios }} Comentários
-                | {{ post.categoria_post }}
+                {{post.data_post|naturalday}} | {{ post.numero_comentarios }} | {{ post.categoria_post }}
               </span><br />
               <a href="{% url 'post_detalhe' post.id %}" class="button">Ler mais...</a>
             </div>
