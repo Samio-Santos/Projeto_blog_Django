@@ -6,17 +6,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Paginal Inicial</title>
-    <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
+    <link rel="stylesheet" href="{% static 'css_accounts/menu_accounts.css' %}" />
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
   </head>
   <body>
-    <div class="menu-block">
+    <!-- <div class="menu-block">
       <label for="check">
         <img id="menu" src="{% static 'img/menu.png' %}" alt="Icone menu" />
       </label>
-    </div>
+    </div> -->
 
-    <input type="checkbox" id="check" />
+    <!-- <input type="checkbox" id="check" /> -->
     <header>
       <div class="container">
         <a href="{% url 'index' %}">
@@ -24,26 +24,37 @@
         </a>
       </div>
 
-      <nav id="container-dropdown">
-        <ul>
-          <li><a href="{% url 'post_categoria' 'python' %}">Python</a></li>
-          <li><a href="{% url 'post_categoria' 'django' %}">Django</a></li>
-          <li><a href="{% url 'post_categoria' 'tecnologia' %}">Tecnologia</a></li>
-          <li><a href="{% url 'post_categoria' 'sistemas' %}">Sistemas</a></li>
+      <form class="box-form" action="{% url 'busca_post' %}">
+        <input
+          id="label"
+          class="pesquisa"
+          name="termo"
+          value="{{ request.GET.termo }}"
+          type="search"
+          minlength="3"
+          placeholder="Pesquisar"
+        />
+      </form>
+      
+      <div class="container-img">
+        {% if user.imagem %}
+          <img class="img" src="{{ user.imagem.url }}" alt="foto-perfil" />
+        {% else %}
 
-          <form class="box-form" action="{% url 'busca_post' %}">
-            <input
-              id="label"
-              class="pesquisa"
-              name="termo"
-              value="{{ request.GET.termo }}"
-              type="search"
-              minlength="3"
-              placeholder="Pesquisar"
-            />
-          </form>
-        </ul>
-      </nav>
+        <img
+          class="img"
+          src="{% static 'img/usuario.png' %}"
+          alt="foto-perfil"
+        />
+        {% endif %}
+          <div class="dropdown-content">
+            <a href="{% url 'post_categoria' 'python' %}">Python</a>
+            <a href="{% url 'post_categoria' 'django' %}">Django</a>
+            <a href="{% url 'post_categoria' 'tecnologia' %}">Tecnologia</a>
+            <a href="{% url 'post_categoria' 'sistemas' %}">Sistemas</a>
+
+          </div>
+        </div>
     </header>
     <main>
       <section class="container2">

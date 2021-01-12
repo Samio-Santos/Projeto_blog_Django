@@ -27,27 +27,58 @@
       <div class="container">
         <a href="{% url 'index' %}">
           <h1>Blog Samio</h1>
-          <img id="icone-login" src="{% static 'img/user.png' %}" alt="" />
+          <img id="icone-login" src="{% static 'img/user.png' %}" alt="Login" />
         </a>
       </div>
     </header>
     <main>
+      {% if not user.is_authenticated %}
       <form action="{% url 'login' %}" method="POST" name="form-login">
+        {% csrf_token %}
         <fieldset>
+          {% if messages %}
+            {% for message in messages %}
+              <div class="{{ message.tags }}" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
           <div class="input-block">
             <label for="user">Login:</label><br />
             <i class="fas fa-user-circle"></i>
-            <input type="text" name="user" id="user" placeholder="User" />
+            <input type="text" name="user" value="{{request.POST.user}}" id="user" placeholder="User" />
           </div>
 
           <div class="input-block">
             <label for="password">Senha:</label><br />
             <i id="senha" class="fas fa-lock"></i>
-            <input type="password" name="password" id="password" placeholder="Password" />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+            />
           </div>
         </fieldset>
-        <button type="submit">Entrar</button>
+
+        <div class="button-block">
+          <button type="submit">Entrar</button>
+        </div>
       </form>
+      
+      {% else %}
+
+      <p>
+        Você já está logado com usuário <span>{{ user }}</span>
+        <a href="{% url 'logout' %}">clique aqui</a>
+        para sair.
+      </p>
+
+      {% endif %}
     </main>
+    
+    <footer>
+      <p>&copy; | Desenvolvido por Samio Santos</p>
+    </footer>
   </body>
 </html>

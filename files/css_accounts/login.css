@@ -51,11 +51,78 @@ form i {
   margin-top: 0.5rem;
 }
 
-form .input-block input[type=text], input[type=password]{
-    padding-left: 30px;
-
+form .input-block input[type="text"],
+input[type="password"] {
+  padding-left: 30px;
 }
 
 ::-webkit-input-placeholder {
-    color: #6d4a76;
+  color: #6d4a76;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  padding: 20px;
+  width: 100%;
+  background-color: #6d4a76;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+}
+
+.alert-success {
+  text-align: center;
+  background-color: rgba(0, 128, 0, 0.233);
+  color: green;
+  width: 100%;
+  margin-left: 0.5rem;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 3rem;
+}
+
+.alert-error {
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.233);
+  color: red;
+  width: 80%;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 700px) {
+  .input-block, form .button-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .input-block label {
+    margin-top: 10px;
+  }
+  
+  .input-block input {
+    width: 30%;
+    margin: 5px;
+  }
+
+  form i {
+    position: relative;
+    left: 27px;
+    margin-bottom: 10px;
+  }
+  
+  form .button-block button {
+    width: 10%;
+  }
+
+  .alert-error, .alert-success {
+    width: 30%;
+    position: relative;
+    bottom: 50px;
+    left: 30px;
+    margin: 0 auto;
+  }
 }

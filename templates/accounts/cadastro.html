@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
+    <link rel="stylesheet" href="{% static 'css_accounts/register.css' %}" />
+  </head>
+  <body>
+    <input type="checkbox" id="check" />
+    <header>
+      <div class="container">
+        <a href="{% url 'index' %}">
+          <h1>Blog Samio</h1>
+          <img id="icone-login" src="{% static 'img/cadastro.png' %}" alt="" />
+        </a>
+      </div>
+    </header>
+    <main>
+      <form action="{% url 'register' %}" method="POST" name="form-login">
+        {% csrf_token %}
+        <fieldset>
+          {% if messages %}
+            {% for message in messages %}
+              <div class="{{ message.tags }}" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+          <div class="input-block">
+            <label for="nome">Nome: </label><br />
+            <input type="text" name="nome" value="{{request.POST.nome}}" id="nome" />
+          </div>
+
+          <div class="input-block">
+            <label for="Snome">Sobrenome:</label><br />
+            <input type="text" name="Snome" value="{{request.POST.Snome}}" id="Snome" />
+          </div>
+
+          <div class="input-block">
+            <label for="email">E-mail:</label><br />
+            <input type="email" name="email" value="{{request.POST.email}}" id="email" />
+          </div>
+
+          <div class="input-block">
+            <label for="user">Usuario:</label><br />
+            <input type="text" name="user" value="{{request.POST.user}}" id="user" />
+          </div>
+
+          <div class="input-block">
+            <label for="password">Senha:</label><br />
+            <input type="password" name="password" id="password" />
+          </div>
+
+          <div class="input-block">
+            <label for="Rsenha">Repetir senha:</label><br />
+            <input type="password" name="Rsenha" id="Rsenha" />
+          </div>
+        </fieldset>
+
+        <button type="submit" title="Cadastrar">Cadastrar</button>
+      </form>
+    </main>
+
+    <footer>
+      <p>&copy; | Desenvolvido por Samio Santos</p>
+    </footer>
+  </body>
+</html>

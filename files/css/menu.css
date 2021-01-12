@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 
+/* Menu-bock */
 input[type="checkbox"] {
   display: none;
 }
@@ -28,15 +29,17 @@ img#menu {
 /*Menu */
 header {
   width: 100%;
-  padding: 1rem;
+  height: 4rem;
   display: flex;
-  align-content: center;
+  align-items: center;
+  justify-content: space-between;
   font-family: sans-serif;
   background-color: #6d4a76;
 }
 
 .container h1 {
   font-size: 25px;
+  margin-left: 1rem;
 }
 
 .container #icone-login {
@@ -56,6 +59,7 @@ header {
   display: none;
   font-size: 17px;
   width: 100%;
+  margin-left: 1rem;
 }
 
 #container-dropdown ul {
@@ -77,11 +81,95 @@ header {
   color: whitesmoke;
 }
 
-#container-dropdown .box-form .pesquisa {
+/* Menu com usuário logado */
+
+.container-img {
+  width: 10%;
+  padding: 6px;
+  cursor: pointer;
+  margin-right: 2rem;
+  font-family: sans-serif;
+}
+
+.img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: fill;
+  z-index: 10;
+}
+
+.container-img {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #6d4a76;
+  min-width: 160px;
+  margin-top: 6px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: whitesmoke;
+  padding: 12px 16px;
+  font-size: 13px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdown-content a:hover {
+  background-color: rgba(128, 128, 128, 0.158);
+}
+
+.container-img:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content h3 {
+  padding: 12px 16px;
+  font-size: 16px;
+  color: white;
+}
+
+.dropdown-content .dropdown-category,
+.dropdown-profile {
+  border-bottom: 0.2px solid rgba(255, 255, 255, 0.5);
+  margin-bottom: 1rem;
+}
+
+/* Campo de pesquisa, login e cadastro */
+
+.form-block {
+  width: 30%;
+}
+
+header .form-block .pesquisa {
+  width: 100%;
   padding: 10px;
   border: none;
   border-radius: 5px;
   outline: none;
+}
+
+form i {
+  position: absolute;
+  margin-top: 0.6rem;
+  margin-left: 0.3rem;
+}
+
+header .form-block .pesquisa[type="search"] {
+  padding-left: 30px;
 }
 
 #container-dropdown #login {
@@ -103,7 +191,7 @@ header {
 
 input[type="checkbox"]:checked ~ header nav#container-dropdown,
 input[type="checkbox"]:checked ~ header {
-  height: 300px;
+  height: 345px;
   display: inline-block;
 }
 
@@ -112,7 +200,7 @@ input[type="checkbox"]:checked ~ header {
 footer {
   position: relative;
   bottom: 0;
-  padding: 20px;
+  padding: 23px;
   width: 100%;
   background-color: #6d4a76;
   color: white;
@@ -161,8 +249,10 @@ footer {
     margin: 2px;
   }
 
-  #container-dropdown .box-form .pesquisa {
-    width: 100%;
+  form i {
+    position: relative;
+    left: 20px;
+    color: black;
   }
 
   #container-dropdown #login {

@@ -8,8 +8,22 @@
     <title>Post</title>
     <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
     <link rel="stylesheet" href="{% static 'css/post.css' %}" />
+
+    <link
+      href="{% static 'fontawesome-free-5.13.0-web/css/fontawesome.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'fontawesome-free-5.13.0-web/css/brands.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'fontawesome-free-5.13.0-web/css/solid.css' %}"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    {% if not user.is_authenticated %}
     <div class="menu-block">
       <label for="check">
         <img id="menu" src="{% static 'img/menu.png' %}" alt="Icone menu" />
@@ -17,32 +31,94 @@
     </div>
 
     <input type="checkbox" id="check" />
+    {% endif %}
     <header>
       <div class="container">
         <a href="{% url 'index' %}">
           <h1>Blog Samio</h1>
         </a>
       </div>
+      {% if not user.is_authenticated %}
+        <nav id="container-dropdown">
+          <ul>
+            <li><a href="{% url 'post_categoria' 'python' %}">Python</a></li>
+            <li><a href="{% url 'post_categoria' 'django' %}">Django</a></li>
+            <li><a href="{% url 'post_categoria' 'tecnologia' %}">Tecnologia</a></li>
+            <li><a href="{% url 'post_categoria' 'sistemas' %}">Sistemas</a></li>
 
-      <nav id="container-dropdown">
-        <ul>
-          <li><a href="{% url 'post_categoria' 'python' %}">Python</a></li>
-          <li><a href="{% url 'post_categoria' 'django' %}">Django</a></li>
-          <li><a href="{% url 'post_categoria' 'tecnologia' %}">Tecnologia</a></li>
-          <li><a href="{% url 'post_categoria' 'sistemas' %}">Sistemas</a></li>
-
+            <div class="form-block">
+              <form class="box-form" action="{% url 'busca_post' %}">
+                <i class="fas fa-search"></i>
+                <input
+                  id="pesquisa"
+                  class="pesquisa"
+                  name="termo"
+                  value="{{ request.GET.termo }}"
+                  type="search"
+                  minlength="3"
+                  style="width: 100;"
+                  placeholder="Pesquisar"
+                />
+              </form>
+            </div>
+      
+            <li id="login"><a href="{% url 'login' %}">Login</a></li>
+            <li id="register"><a href="{% url 'register' %}">Cadastrar</a></li>
+          </ul>
+        </nav>
+      {% else %}
+        <div class="form-block">
           <form class="box-form" action="{% url 'busca_post' %}">
+            <i class="fas fa-search"></i>
             <input
-              id="label"
-              class="pesquisa"
-              name="termo"
-              value="{{ request.GET.termo }}"
-              type="search"
-              placeholder="Pesquisar"
+            id="pesquisa"
+            class="pesquisa"
+            name="termo"
+            value="{{ request.GET.termo }}"
+            type="search"
+            minlength="3"
+            style="width: 100;"
+            placeholder="Pesquisar"
             />
           </form>
-        </ul>
-      </nav>
+        </div>
+        
+        <div class="container-img">
+          {% if user.imagem %}
+            <img class="img" src="{{ user.imagem.url }}" alt="foto-perfil" />
+          {% else %}
+            <img
+              class="img"
+              src="{% static 'img/usuario.png' %}"
+              alt="foto-perfil"
+            />
+          {% endif %}
+          <div class="dropdown-content">
+            <div class="dropdown-category">
+              <h3>Categorias</h3>
+              <a href="{% url 'post_categoria' 'python' %}">Python</a>
+              <a href="{% url 'post_categoria' 'django' %}">Django</a>
+              <a href="{% url 'post_categoria' 'tecnologia' %}">Tecnologia</a>
+              <a href="{% url 'post_categoria' 'sistemas' %}">Sistemas</a>
+            </div>
+
+            <div class="dropdown-profile">
+              <h3>Perfil</h3>
+              <a href="#">
+                Perfil
+                <i class="fas fa-user-circle"></i>
+              </a>
+            </div>
+
+            <div>
+              <a href="{% url 'logout' %}">
+                Logout
+                <i class="fas fa-sign-out-alt"></i>
+              </a>
+            </div>
+          </div>
+          </div>
+      {% endif %}
     </header>
     <main>
       <section class="box-container">
@@ -74,12 +150,14 @@
               <p>
                 {{comment.comentario}}
               </p>
-              <!-- <form action="#" method="POST">
+              {% if user.is_authenticated %}
+              <form action="#" method="POST">
                 <div>
                   <textarea id="item-text" cols="30" rows="10" placeholder="Responder {{comment.nome}}"></textarea>
                 </div>
                 <button type="submit" id="button-comments">Enviar</button>
-              </form>  -->
+              </form>
+              {% endif %}
             </div>
           {% endfor %}
         </div>
