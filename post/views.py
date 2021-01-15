@@ -16,7 +16,7 @@ def index(request):
                 When(comentarios__publicado_comentario=True, then=1)
             )
         )
-    )
+    ).filter(publicado_post=True)
 
     paginator = Paginator(post, 4)
     page = request.GET.get('p')
@@ -86,7 +86,7 @@ def busca_post(request):
         # 'Q' permite fazer um buscar mais avançada e exata, ou é um ou é outro
         Q(titulo_post__icontains=termo) | Q(autor_post__username__iexact=termo) |
         Q(categoria_post__nome_cat__iexact=termo) | Q(conteudo_post__icontains=termo) |
-        Q(resumo_post__icontains=termo)
+        Q(resumo_post__icontains=termo), publicado_post=True
 
      )
      

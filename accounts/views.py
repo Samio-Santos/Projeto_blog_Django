@@ -3,12 +3,13 @@ from django.contrib import messages, auth
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from .form import Userform
 
 
 def login(request):
     if request.method != 'POST':
         return render(request, 'accounts/login.html')
-    
+
     usuario = request.POST.get('user')
     senha = request.POST.get('password')
 
@@ -75,6 +76,23 @@ def cadastro(request):
 
     return redirect('login')
 
+
+def perfil_usuario(request, id):
+    data = {}
+    user = User.objects.get(id=id)
+    form  = Userform(request.POST or None, request.FILES or None, instance=user)
+
+    data['user'] = user
+    data['form'] = form
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Dados atualizados com sucesso')
+            return redirect('dashboard')
+    
+    else:
+        return render(request, 'accounts/perfil_user.html', data)
 
 
 

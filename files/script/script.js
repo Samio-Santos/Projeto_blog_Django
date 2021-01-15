@@ -1,7 +1,19 @@
-function resposta() {
-    var resp = document.getElementById('resp')
+/* Quando o usuário clica no botão,
+alternar entre ocultar e mostrar o conteúdo suspenso  */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
 
-    textarea = document.createElement('textarea')
+// Feche a lista suspensa se o usuário clicar fora dela
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn-img') && !e.target.matches('.dropbtn-seta')) {
 
-    resp.appendChild(textarea).focus()
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    for (var d = 0; d < dropdowns.length; d++) {
+      var openDropdown = dropdowns[d];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
 }
