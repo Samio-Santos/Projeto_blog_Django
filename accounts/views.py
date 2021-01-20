@@ -21,6 +21,7 @@ def login(request):
     
     else:
         auth.login(request, user)
+        messages.success(request, f'Seja bem-vindo {user.first_name} {user.last_name}!')
         return redirect('dashboard')
 
 def logout(request):
@@ -70,7 +71,7 @@ def cadastro(request):
         return render(request, 'accounts/cadastro.html')
     
     messages.success(request, 'Usuário registrado com sucesso. Agora faça login!')
-    user = User.objects.create_user(username=user , email=email, password=senha, first_name=nome, last_name=sobrenome)
+    user = User.objects.create_user(username=user, email=email, password=senha, first_name=nome, last_name=sobrenome)
 
     user.save()
 

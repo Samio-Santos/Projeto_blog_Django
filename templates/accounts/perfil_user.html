@@ -75,6 +75,10 @@
         </div>
 
         <div class="input-block">
+          <label for="{{ form.id_last_name_for_label }}">Usuario:</label>
+          {{ form.username }}
+        </div>
+        <div class="input-block">
           <label for="{{ form.id_first_name_for_label }}">Nome:</label>
           {{ form.first_name }}
         </div>
@@ -84,14 +88,15 @@
           {{ form.last_name }}
         </div>
 
+
         <div class="input-block">
           <label for="{{ form.id_email }}">E-mail:</label>
           {{ form.email }}
         </div>
 
         <div class="input-block">
-          <label for="{{ form.id_bio_for_label }}">Bio:</label>
-          {{ form.bio }}
+          <label for="{{ form.id_biografia_for_label }}">Biografia:</label>
+          {{ form.biografia }}
         </div>
 
         <div class="input-block-img">

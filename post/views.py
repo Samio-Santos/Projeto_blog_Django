@@ -35,7 +35,7 @@ def post(request, id):
         publicado_comentario=True,
         post_comentario=post
     )
-
+    
     if not post.publicado_post:
         raise Http404()
 
@@ -50,8 +50,9 @@ def post(request, id):
     data['post'] = post
     data['form'] = form
     data['comments'] = comments
-
+    
     return render(request, 'posts/post.html', data)
+
 
 
 def post_categoria(request, categoria):

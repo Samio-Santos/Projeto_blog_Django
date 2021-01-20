@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'post',
     'comentarios',
     'categorias',
+    'social_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -69,6 +70,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -148,5 +151,30 @@ MESSAGE_TAGS = {
     constants.DEBUG: 'alert-info',
 }
 
+# Configuração Django-Summernote
 INSTALLED_APPS += ('django_summernote',)
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+
+# Configuração rede social
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# Autenticação pelo facebook
+SOCIAL_AUTH_FACEBOOK_KEY = '414184179999238'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'd68fed2d64092e2cb32bc5fadf800682'
+
+# Autenticação pelo Github
+SOCIAL_AUTH_GITHUB_KEY = 'a4a0697de7ac8fb277e2'
+SOCIAL_AUTH_GITHUB_SECRET = '35585559b09ce930e09bfa9cf1327ae469766ff4'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '955161584054-ocobrnmng47tj4625kk4rtsbojqbukjf.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'EOQ-7TD62FBMBmNfdwqulvgy'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

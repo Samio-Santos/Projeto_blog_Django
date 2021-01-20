@@ -4,6 +4,7 @@ from post.models import Post
 from django.utils import timezone
 
 
+
 class Comentarios(models.Model):
     nome = models.CharField(max_length=250)
     email = models.EmailField()
@@ -13,11 +14,9 @@ class Comentarios(models.Model):
     data_comentario = models.DateTimeField(default=timezone.now)
     publicado_comentario = models.BooleanField(default=False)
 
-
     class Meta:
         verbose_name_plural = "comentários"
 
-
     def __str__(self):
         return self.nome
-    
+

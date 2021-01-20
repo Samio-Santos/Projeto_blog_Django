@@ -1,0 +1,163 @@
+.container {
+  font-family: sans-serif;
+}
+.container h2 {
+  padding: 40px;
+  font-weight: 300;
+  text-shadow: 0px 3px 2px rgb(50, 50, 50, 1);
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-around;
+}
+
+.flex-container .block-text {
+  width: 50%;
+  word-wrap: break-word;
+  border: 1px solid red;
+  margin-top: 50%;
+  line-height: 1.5;
+  color: #6d4a76;
+  text-align: center;
+  font-size: 30px;
+}
+
+.cards {
+  height: 100vh;
+  border: 0.3px solid #6c757d;
+  border-radius: 4px;
+  word-wrap: break-word;
+  margin: 10px;
+  margin-bottom: 20px;
+  position: relative;
+  flex: 0 0 85%; /* define se os cards ficam na mesma linha */
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.185);
+}
+
+.cards img {
+  width: 100%;
+  height: 50vh;
+  object-fit: fill;
+}
+
+.cards a {
+  text-decoration: none;
+}
+
+.cards h3 {
+  color: #6d4a76;
+  word-wrap: break-word;
+  transition: 1s;
+}
+
+.cards h3,
+p,
+span {
+  margin: 1rem;
+  margin-bottom: 10px;
+}
+
+
+.cards h3:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+.cards span {
+  color: #6c757d;
+}
+
+.cards .button {
+  color: #3ca9a1;
+  position: absolute;
+  border-radius: 4px;
+  right: 0;
+  bottom: 0;
+  margin: 1rem;
+  padding: 10px;
+  border: 1px solid #3ca9a1;
+  margin-bottom: 20px;
+  transition: 1s;
+  text-decoration: none;
+}
+
+.cards a:hover {
+  background-color: #3ca9a1;
+  color: white;
+}
+
+ul.pagination {
+  display: inline-block;
+  padding: 10px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ul.pagination li {
+  display: inline;
+}
+
+ul.pagination li a,
+a#before,
+a#next {
+  color: black;
+  float: left;
+  margin: 5px;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+ul.pagination li a.active {
+  background-color: #6d4a76;
+  color: white;
+  border-radius: 5px;
+}
+
+ul.pagination li a:hover,
+a#before:hover,
+a#next:hover {
+  background-color: #ddd;
+}
+
+.alert-success {
+  text-align: center;
+  background-color: rgba(0, 128, 0, 0.233);
+  color: green;
+  width: 50%;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.alert-error {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.233);
+  color: red;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+@media (min-width: 700px) {
+  .container2 {
+    width: 100%;
+    margin: 0 auto;
+  }
+  /* .flex-container .block-text {
+    padding: 190px;
+  } */
+  .cards {
+    flex: 0 0 40%;
+  }
+
+  .cards img {
+    width: 100%;
+  }
+}

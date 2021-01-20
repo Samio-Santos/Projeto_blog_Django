@@ -26,6 +26,7 @@ urlpatterns = [
     path('accounts/', include('accounts.url')),
     path('post/', include('post.url')),
     path('summernote/', include('django_summernote.urls')),
+    path('social-auth/', include('social_django.urls', namespace='social')),
     path('admin/', admin.site.urls),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

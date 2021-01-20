@@ -172,26 +172,28 @@
                 {{comment.comentario}}
               </p>
 
-              <div class="block-resp">
-                {% if user.imagem %} 
-                  <img src="{{ user.imagem.url }}" alt="foto-perfil">
-                {% else %}
-                  <img src="{% static 'img/profile-user.png' %}" alt="foto-perfil">
-                {% endif %}
-                <small>{{ user.first_name }} {{ user.last_name }} | 15 de outubro de 2021</small>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-              </div>
-
+                <!-- Container para implementar respostas nos comentários -->
+                <!-- <div class="block-resp">
+                  {% if user.imagem %} 
+                    <img src="{{ user.imagem.url }}" alt="foto-perfil">
+                  {% else %}
+                    <img src="{% static 'img/profile-user.png' %}" alt="foto-perfil">
+                  {% endif %}
+                  <small>{{ user.first_name }} {{ user.last_name }} | 15 de outubro de 2021</small>
+                  <p>{{ r }}</p>
+                </div> 
+            
               {% if user.is_authenticated %}
                 <div class="resp">
-                  <form action="#" method="POST">
+                  <form action="#enviarResposta" method="POST">
+                    {% csrf_token %}
                     <div>
-                      <textarea id="item-text" cols="30" rows="10" placeholder="Responder {{comment.nome}}"></textarea>
+                      {{resposta}}
                     </div>
                     <button type="submit" id="button-comments">Enviar</button>
                   </form>
                 </div>
-              {% endif %}
+              {% endif %} -->
             </div>
           {% endfor %}
         </div>
@@ -199,21 +201,21 @@
 
         <div class="contact">
           <h1>Deixe um comentário</h1>
-          <form action="#enviar_comentario" method="POST">
+          <form action="{% url 'post_detalhe' post.id %}" method="POST">
             {% csrf_token %}
             <div class="box-input">
               <label for="{{ form.nome.id_for_label }}">Nome:</label>
-              {{ form.nome }}
+              <input type="text" name="nome">
             </div>
 
             <div class="box-input">
               <label for="{{ form.email.id_for_label }}">E-mail:</label>
-              {{ form.email}}
+              <input type="email" name="email">
             </div>
 
             <div class="box-input">
               <label for="{{ form.comentario.id_for_label }}">Comentário:</label>
-              {{form.comentario}}
+              <textarea name="comentario" cols="30" rows="10"></textarea>
             </div>
 
             <button type="submit" title="Enviar Formulário">Enviar</button>
