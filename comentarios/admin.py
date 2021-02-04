@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Comentarios
+from .models import Comentarios, Resposta
 
 # Register your models here.
 
@@ -10,3 +10,4 @@ class ComentarioAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'nome', 'email')
 
 admin.site.register(Comentarios, ComentarioAdmin)
+admin.site.register(Resposta)

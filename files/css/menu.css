@@ -116,7 +116,7 @@ header {
   right: -2rem;
   background-color: #6d4a76;
   min-width: 160px;
-  margin-top: 6px;
+  margin-top: 10px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }

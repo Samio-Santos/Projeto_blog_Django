@@ -1,11 +1,12 @@
 from django.shortcuts import render,get_object_or_404, redirect
 from post.models import Post
-from comentarios.models import Comentarios
+from comentarios.models import Comentarios, Resposta
 from django.http import Http404
 from django.core.paginator import Paginator
 from django.db.models import Q, Case, Count, When
 from django.contrib import messages
-from comentarios.forms import FormComentario
+from comentarios.forms import FormComentario, FormResposta
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -31,25 +32,45 @@ def post(request, id):
 
     post = get_object_or_404(Post, id=id)
     form = FormComentario(request.POST or None)
-    comments = Comentarios.objects.filter(
+    comments = Comentarios.objects.order_by('-id').filter(
         publicado_comentario=True,
         post_comentario=post
     )
-    
+
+    resp = Resposta.objects.order_by('-id')
+    formResp = FormResposta(request.POST or None)
+
     if not post.publicado_post:
         raise Http404()
 
     if request.method == 'POST':
         if form.is_valid():
-            comentario = Comentarios(**form.cleaned_data)
-            comentario.post_comentario = post
-            comentario.save()
-            messages.success(request, 'Comentário enviado com sucesso!')
-            return redirect('post_detalhe', id=post.id)
+            if not request.user.is_authenticated:
+                comentario = Comentarios(**form.cleaned_data)
+                comentario.post_comentario = post
+                comentario.save()
+                messages.success(request, 'Comentário enviado com sucesso!')
+
+            else:
+                comentario = Comentarios(**form.cleaned_data)
+                comentario.post_comentario = post
+                comentario.usuario_comentario =  User.objects.get(id=request.POST.get('user_id'))
+                comentario.save()
+                messages.success(request, 'Comentário enviado com sucesso!')
+            
+        if formResp.is_valid():
+            resposta = Resposta(**formResp.cleaned_data)
+            resposta.profile = User.objects.get(id=request.POST.get('user_id'))
+            resposta.resposta_comentario = Comentarios.objects.get(id=request.POST.get('comment_id'))
+            resposta.save()
+            formResp = FormResposta()
 
     data['post'] = post
     data['form'] = form
     data['comments'] = comments
+    
+    data['resp'] = resp
+    data['formResp'] = formResp
     
     return render(request, 'posts/post.html', data)
 

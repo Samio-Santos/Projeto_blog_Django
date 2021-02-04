@@ -37,33 +37,79 @@
 .comments {
   margin: 20px;
   margin-top: 4rem;
+  word-wrap: break-word;
 }
 
 .comments .item {
-  background-color: #ffffff;
+  background-color: rgba(245, 245, 245, 0.267);
   border: 1px solid #e6e6f0;
   border-radius: 0.4rem;
   margin-top: 2.4rem;
 }
 
-.comments .item h4,
-small,
-.item p,
-#item-text,
-.item #button-comments {
-  margin: 0.7rem;
+.comments .item .comments-container {
+  padding: 1.2rem 1.4rem;
+  display: flex;
+  align-items: center;
 }
 
+.comments .item img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.comments .item .comments-container div {
+  margin-left: 0.7rem;
+}
+
+.comments .item .comments-container div strong {
+  font: 700 16px sans-serif;
+  display: block;
+}
+
+.comments .item .comments-container div span {
+  font-size: 13px;
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.comments .item .button-resp,
+.comments .item .resp .form-resp #id_resposta,
+.item #button-comments {
+  margin: 0.7rem;
+  margin-left: 2.2rem;
+}
+
+.comments .item b,
+.comments .item p {
+  margin-left: 2.2rem;
+  margin-top: 0.2rem;
+}
 
 .comments .item .resp #button-comments {
   width: 20%;
 }
 
-.comments .item .resp #item-text {
-  width: 90%;
+.comments .item .resp .form-resp #id_resposta {
+  width: 85%;
   height: 3rem;
 }
 
+.comments .item .block-a {
+  text-align: right;
+  font-size: 10px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+.comments .item .block-a a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  font-weight: bolder;
+}
 
 /* Container para exibir as respostas nos comentários */
 .item .block-resp {
@@ -72,7 +118,8 @@ small,
   background-color: rgba(128, 128, 128, 0.5);
   word-wrap: break-word;
   position: relative;
-  left: 2rem;
+  left: 3rem;
+  margin-top: 1rem;
   border-radius: 4px;
 }
 
@@ -80,26 +127,34 @@ small,
   width: 2rem;
   height: 2rem;
   position: relative;
+  top: 5px;
   left: 7px;
-  top: 7px;
   border-radius: 50%;
 }
 
 .item .block-resp small {
-  font-weight: bold;
+  font-weight: bolder;
   color: #6c757d;
-  position:absolute;
+  position: absolute;
   font-size: 10px;
   padding: 2px;
-  top: 4px;
+  top: 10px;
+  left: 2.6rem;
 }
 
 .item .block-resp p {
   padding: 1rem;
   line-height: 1.5;
+  position: relative;
+  bottom: 1rem;
 }
 
-/* Container para fazer um comentário */
+.item .button-resp {
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+/* Container para fazer um comentário com usuario */
 .contact {
   margin: 20px;
 }
@@ -125,7 +180,7 @@ small,
 
 .contact .box-input input,
 textarea {
-  width: 50%;
+  width: 70%;
   padding: 5px;
   border: 1px solid rgba(0, 0, 0, 0.404);
   border-radius: 3px;
@@ -137,6 +192,16 @@ textarea {
 .box-input input:focus,
 textarea:focus {
   border: 1.5px solid #6d4a76;
+}
+
+.contact .box-img img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+}
+
+.contact .box-img p {
+  font-weight: bolder;
 }
 
 form button {

@@ -6,6 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Post</title>
+    <link rel="icon" href="{% static 'img/blog.png' %}">
     <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
     <link rel="stylesheet" href="{% static 'css/post.css' %}" />
 
@@ -143,84 +144,148 @@
     <main>
       <section class="box-container">
         <div class="cards">
-          {% if messages %}
-            {% for message in messages %}
-              <div class="{{ message.tags }}" role="alert">
-                {{ message }}
-              </div>
-            {% endfor %}
-          {% endif %}
-
             <h2>{{ post.titulo_post }}</h2>
             <h5>{{ post.resumo_post }}</h5>
             <small>{{ post.autor_post }} | {{ post.data_post }} | {{post.categoria_post }}</small>
             {% if post.imagem_post %}
               <img src="{{ post.imagem_post.url }}" alt="{{ post.titulo_post }}" />
             {% endif %}
-
             <div>{{ post.conteudo_post|safe }}</div>
         </div>
-
+    
         {% if comments %}
         <div class="comments">
           <h1>Comentários ({{ comments.count}})</h1>
           {% for comment in comments %}
             <div class="item">
-              <h4>{{comment.nome}} disse:</h4>
-              <small>{{comment.data_comentario|naturalday}}</small>
-              <p>
-                {{comment.comentario}}
-              </p>
+              <input type="hidden" name="comment_id" value={{comment.id}}>
 
-                <!-- Container para implementar respostas nos comentários -->
-                <!-- <div class="block-resp">
-                  {% if user.imagem %} 
-                    <img src="{{ user.imagem.url }}" alt="foto-perfil">
-                  {% else %}
-                    <img src="{% static 'img/profile-user.png' %}" alt="foto-perfil">
-                  {% endif %}
-                  <small>{{ user.first_name }} {{ user.last_name }} | 15 de outubro de 2021</small>
-                  <p>{{ r }}</p>
-                </div> 
-            
+              <div class="comments-container">
+                {% if comment.usuario_comentario.imagem %}
+                  <img src="{{ comment.usuario_comentario.imagem.url}}" alt="foto-perfil">
+                {% endif %}
+                <div>
+                    <strong>{{comment.nome}}</strong>
+                    <span>{{comment.data_comentario|naturalday}}</span>
+                </div>
+              </div>
+              
+              <b style="font-size: 13px;">comentou:</b>
+              <p>{{comment.comentario}}</p><br>
+
+              <!-- botão para exibir ou ocultar container de resposta -->
+              {% if comment.num_resp %}
+                <small id="{{comment.nome}}" class="button-resp" onclick="mostraDiv('{{comment.id}}', '{{comment.nome}}', '{{comment.num_resp}}')">Ver {{comment.num_resp}} respostas</small>
+              {% endif %}
+
+              <!-- Container para exibir respostas nos comentários -->
+              <div id="{{comment.id}}" class="container-resp" style="display: none;">
+                {% for obj in resp %}
+                    {% if obj.resposta_comentario == comment %}
+                      <div class="block-resp">
+                        <input type="hidden" name="user_id" value={{user.id}}>
+                        {% if obj.profile.imagem %}
+                          <img src="{{ obj.profile.imagem.url }}" alt="foto-perfil">
+                        {% else %}
+                          <img src="{% static 'img/profile-user.png' %}" alt="foto-perfil">
+                        {% endif %}
+                        <small>{{obj.profile.first_name }} {{ obj.profile.last_name }} | {{ obj.data_resposta}}</small>
+                        <p>{{ obj.resposta }}</p>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+              </div>
+              
+              {% if not user.is_authenticated %}
+                <div class="block-a">
+                  <a href="{% url 'login' %}">Faça login para responder {{comment.nome}}</a>
+                </div>
+              {% endif %}
+
               {% if user.is_authenticated %}
                 <div class="resp">
-                  <form action="#enviarResposta" method="POST">
+                  <form action="#RespostaEnviada" method="POST">
                     {% csrf_token %}
-                    <div>
-                      {{resposta}}
+                    <input type="hidden" name="comment_id" value={{comment.id}}>
+                    <input type="hidden" name="user_id" value={{user.id}}>
+                    <div class="form-resp">
+                      {{formResp.resposta}}
                     </div>
-                    <button type="submit" id="button-comments">Enviar</button>
+                    <button type="submit" name="submit_c_form" id="button-comments">Enviar</button>
                   </form>
                 </div>
-              {% endif %} -->
+              {% endif %}
             </div>
           {% endfor %}
         </div>
         {% endif %}
 
-        <div class="contact">
-          <h1>Deixe um comentário</h1>
-          <form action="{% url 'post_detalhe' post.id %}" method="POST">
-            {% csrf_token %}
-            <div class="box-input">
-              <label for="{{ form.nome.id_for_label }}">Nome:</label>
-              <input type="text" name="nome">
-            </div>
+        {% if messages %}
+            {% for message in messages %}
+              <div class="{{ message.tags }}" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+        {% endif %}
+        
+        {% if not user.is_authenticated %}
+          <div class="contact">
+            <h1>Deixe um comentário</h1>
+            <form action="{% url 'post_detalhe' post.id %}" method="POST">
+              {% csrf_token %}
+              <div class="box-input">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome">
+              </div>
 
-            <div class="box-input">
-              <label for="{{ form.email.id_for_label }}">E-mail:</label>
-              <input type="email" name="email">
-            </div>
+              <div class="box-input">
+                <label for="email">E-mail:</label>
+                <input type="email" name="email" id="email">
+              </div>
 
-            <div class="box-input">
-              <label for="{{ form.comentario.id_for_label }}">Comentário:</label>
-              <textarea name="comentario" cols="30" rows="10"></textarea>
-            </div>
+              <div class="box-input">
+                <label for="body">Comentário:</label>
+                <textarea name="comentario" cols="30" rows="10" id="body"></textarea>
+              </div>
 
-            <button type="submit" title="Enviar Formulário">Enviar</button>
-          </form>
-        </div>
+              <button type="submit" name="submit_comment" title="Enviar Formulário">Enviar</button>
+            </form>
+          </div>
+          
+        {% else %}
+          <div class="contact">
+            <h1>Deixe um comentario:</h1>
+            <form action="{% url 'post_detalhe' post.id %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="user_id" value={{user.id}}>
+              <div class="box-img">
+                {% if user.imagem %}
+                  <img src="{{ user.imagem.url }}" alt="foto-perfil">
+                {% else %}
+                  <img src="{% static 'img/profile-user.png' %}" alt="foto-perfil">
+                {% endif %}
+                  <p>{{user.first_name}} {{user.last_name}}</p>
+              </div>
+
+              <div class="box-input" style="display: none;">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" value="{{user.first_name}} {{user.last_name}}" id="nome">
+              </div>
+
+              <div class="box-input" style="display: none;">
+                <label for="email">E-mail:</label>
+                <input type="email" name="email" value="{{user.email}}" id="nome">
+              </div>
+
+              <div class="box-input">
+                <label for="body">Comentário:</label>
+                <textarea name="comentario" cols="30" rows="10" id="body"></textarea>
+              </div>
+
+              <button type="submit" name="submit_comment" title="Enviar Formulário">Enviar</button>
+            </form>
+          </div>
+        {% endif %}
       </section>
     </main>
 

@@ -18,6 +18,11 @@ fieldset {
   bottom: 0.5rem;
 }
 
+.input-block a {
+  text-decoration: underline;
+  color: black;
+}
+
 .input-block input {
   width: 80%;
   outline: none;
@@ -60,7 +65,7 @@ form button:hover {
 
 form i {
   position: absolute;
-  left: 1.5rem;
+  left: 1rem;
   margin-top: 0.5rem;
 }
 
@@ -76,7 +81,7 @@ form a {
 
 form .input-block input[type="text"],
 input[type="password"] {
-  padding-left: 30px;
+  padding-left: 25px;
 }
 
 ::-webkit-input-placeholder {

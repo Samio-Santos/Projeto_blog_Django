@@ -17,3 +17,19 @@ window.onclick = function(e) {
     }
   }
 }
+
+
+function mostraDiv(id, nome, count) {
+
+  var container = document.getElementById(id)
+  var button = document.getElementById(nome)
+
+  if (container.style.display === "none") {
+    container.style.display = "block";
+    button.innerText = `Ocultar ${count} respostas`;
+  
+  } else {
+    container.style.display = "none";
+    button.innerText = `Ver ${count} respostas`;
+  }
+}
