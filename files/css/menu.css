@@ -20,6 +20,8 @@ input#check[type="checkbox"] {
   padding: 15px;
   position: absolute;
   cursor: pointer;
+  z-index: 2;
+  position: fixed;
 }
 
 img#menu {
@@ -30,15 +32,17 @@ img#menu {
 header {
   width: 100%;
   height: 4rem;
+  font-family: sans-serif;
+  background-color: #6d4a76;
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: sans-serif;
-  background-color: #6d4a76;
+  z-index: 1;
 }
 
 .container h1 {
-  font-size: 25px;
+  font-size: 20px;
   margin-left: 1rem;
 }
 
@@ -84,14 +88,35 @@ header {
 /* Menu com usuário logado */
 
 .container-img {
-  width: 10%;
-  padding: 6px;
   cursor: pointer;
-  margin-right: 2.5rem;
+  margin-right: 3rem;
   font-family: sans-serif;
+  position: relative;
+}
+
+.container-img #search-img {
+  display: none;
+}
+
+.container-img #count-notification {
+  position: relative;
+  text-align: center;
+  border-radius: 20%;
+  font-size: 10px;
+  padding: 3px;
+  bottom: 1.5rem;
+  left: 1rem;
+  color: white;
+  font-weight: bolder;
+  background-color: red;
+}
+.container-img .notification {
+  margin-right: 1rem;
+  height: 1.7rem;
 }
 
 .dropbtn-img {
+  right: 0;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
@@ -101,13 +126,8 @@ header {
 .dropbtn-seta {
   height: 1rem;
   position: absolute;
-  left: 3.2rem;
-  bottom: 1rem;
-}
-
-.container-img {
-  position: relative;
-  display: inline-block;
+  margin-left: 0.5rem;
+  top: 1.5rem;
 }
 
 .dropdown-content {
@@ -116,7 +136,7 @@ header {
   right: -2rem;
   background-color: #6d4a76;
   min-width: 160px;
-  margin-top: 10px;
+  margin-top: 9px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
@@ -154,13 +174,126 @@ header {
   margin-bottom: 1rem;
 }
 
+/* Seção de estilo para as notificações */
+.dropdown-notification {
+  display: none;
+  position: absolute;
+  right: -2rem;
+  background-color: #6d4a76;
+  width: 300px;
+  border-radius: 2%;
+  max-height: 333px;
+  margin-top: 9px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Personalização do scroll do container .dropdown-notification */
+/* width */
+.dropdown-notification::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.dropdown-notification::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.dropdown-notification::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.dropdown-notification::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.dropdown-notification a {
+  color: whitesmoke;
+  font-size: 13px;
+  text-decoration: none;
+
+  display: grid;
+  grid-template-columns: 0.7fr 2.5fr 0.4fr;
+}
+
+.dropdown-notification a:hover {
+  background-color: rgba(128, 128, 128, 0.158);
+}
+
+.box-notification a .box {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.box-notification a .box img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: fill;
+}
+
+.box-notification a .box1 {
+  color: white;
+  font-family: sans-serif;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 2;
+  margin-bottom: 10px;
+}
+
+.box-notification a .box1 span {
+  margin-left: 10px;
+}
+
+.box-notification a .box1 p,
+.box-notification a .box1 small {
+  margin-left: 10px;
+  /* line-height: 3; */
+}
+
+.box-notification a .box1 p {
+  font-weight: bolder;
+  font-size: 13px;
+}
+
+.box-notification a .box1 small {
+  font-size: 10px;
+}
+
+.box-notification a .box2 {
+  margin-right: 10px;
+}
+
+.box-notification a .box2 img {
+  width: 3rem;
+  height: 4rem;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.show-notification {
+  display: block;
+}
+
+.dropdown-notification h3 {
+  padding: 12px 16px;
+  font-size: 20px;
+  color: white;
+  border-bottom: 0.2px solid rgba(255, 255, 255, 0.5);
+}
+
 /* Campo de pesquisa, login e cadastro */
 
 .form-block {
   width: 30%;
 }
 
-header .form-block .pesquisa {
+.form-block .pesquisa {
   width: 100%;
   padding: 10px;
   border: none;
@@ -212,6 +345,18 @@ footer {
   color: white;
   font-size: 18px;
   text-align: center;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 640px) {
+  #form-search {
+    display: none;
+  }
+
+  .container-img #search-img {
+    display: inline-block;
+    margin-right: 1rem;
+    height: 1.6rem;
+  }
 }
 
 @media (min-width: 1100px) {

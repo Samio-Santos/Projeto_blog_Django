@@ -1,0 +1,186 @@
+{% load static %}
+{% if not user.is_authenticated %}
+    <div class="menu-block">
+        <label for="check">
+            <img id="menu" src="{% static 'img/menu.png' %}" alt="Icone menu" />
+        </label>
+    </div>
+
+    <input type="checkbox" id="check" />
+{% endif %}
+
+<header>
+    <div class="container">
+      <a href="{% url 'index' %}">
+        <h1 id="title">Blog Samio</h1>
+      </a>
+    </div>
+    {% if not user.is_authenticated %}
+    <nav id="container-dropdown">
+      <ul>
+        <li><a href="{% url 'post_categoria' 'python' %}">Python</a></li>
+        <li><a href="{% url 'post_categoria' 'django' %}">Django</a></li>
+        <li>
+          <a href="{% url 'post_categoria' 'tecnologia' %}">Tecnologia</a>
+        </li>
+        <li><a href="{% url 'post_categoria' 'sistemas' %}">Sistemas</a></li>
+
+        <div class="form-block">
+          <form class="box-form" action="{% url 'busca_post' %}">
+            <i class="fas fa-search"></i>
+            <input
+              id="pesquisa"
+              class="pesquisa"
+              name="termo"
+              value="{{ request.GET.termo }}"
+              type="search"
+              minlength="3"
+              maxlength="30"
+              placeholder="Pesquisar"
+            />
+          </form>
+        </div>
+
+        <li id="login"><a href="{% url 'login' %}">Login</a></li>
+        <li id="register"><a href="{% url 'register' %}">Cadastrar</a></li>
+      </ul>
+    </nav>
+    {% else %}
+    <div id="form-search" class="form-block">
+      <form class="box-form" action="{% url 'busca_post' %}">
+        <i class="fas fa-search"></i>
+        <input
+          id="pesquisa"
+          class="pesquisa"
+          name="termo"
+          value="{{ request.GET.termo }}"
+          type="search"
+          minlength="3"
+          maxlength="30"
+          placeholder="Pesquisar"
+
+        />
+      </form>
+    </div>
+    <div class="container-img">
+      <img id="search-img" src="{% static 'img/procurar.png' %}" alt="pesquisar" onclick="search()">
+
+      {% if count_notification %}
+        <span id="count-notification">{{count_notification}}</span>
+      {% endif %}
+      <img 
+        class="notification" 
+        src="{% static 'img/notificacao.png' %}" 
+        alt="notificação" 
+        onclick="notification()"
+      />
+      {% if user.imagem %}
+      <img
+        class="dropbtn-img"
+        src="{{ user.imagem.url }}"
+        alt="foto-perfil"
+        onclick="myFunction()"
+      />
+      <img
+        class="dropbtn-seta"
+        src="{% static 'img/seta-suspensa.png' %}"
+        alt="seta-menu"
+        onclick="myFunction()"
+      />
+      {% else %}
+      <img
+        class="dropbtn-img"
+        src="{% static 'img/usuario.png' %}"
+        alt="foto-perfil"
+        onclick="myFunction()"
+      />
+      <img
+        class="dropbtn-seta"
+        src="{% static 'img/seta-suspensa.png' %}"
+        alt="seta-menu"
+        onclick="myFunction()"
+      />
+      {% endif %}
+      <div class="dropdown-content" id="myDropdown">
+        <div class="dropdown-category">
+          <h3>Categorias</h3>
+          <a href="{% url 'post_categoria' 'python' %}">Python</a>
+          <a href="{% url 'post_categoria' 'django' %}">Django</a>
+          <a href="{% url 'post_categoria' 'tecnologia' %}">Tecnologia</a>
+          <a href="{% url 'post_categoria' 'sistemas' %}">Sistemas</a>
+        </div>
+
+        <div class="dropdown-profile">
+          <h3>Perfil</h3>
+          <a href="{% url 'perfil_user' user.id %}">
+            Perfil
+            <i class="fas fa-user-circle"></i>
+          </a>
+        </div>
+
+        <div>
+          <a href="{% url 'logout' %}">
+            Logout
+            <i class="fas fa-sign-out-alt"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Container para notificação -->
+      <div class="dropdown-notification" id="myDropdown-notification">
+        <div class="box-notification">
+          <h3>Notificações</h3>
+          {% if notifications %}
+            {% for obj in notifications %}
+              {% if obj.notification_type == 2 %}
+                <a href="{% url 'post_detalhe' obj.comentario.post_comentario.id %}">
+                  <div class="box">
+                    {% if obj.user_from.imagem %}
+                      <img src="{{ obj.user_from.imagem.url }}" alt="foto-perfil">
+                    {% else %}
+                      <img src="{% static 'img/profile-user.png' %}" alt="foto-perfil">
+                    {% endif %}
+                  </div>
+
+                  <div class="box1">
+                    <span>{{ obj.user_from.first_name }} {{obj.user_from.last_name}}</span><br>
+                    <span>respondeu seu comentário:</span>
+                    <p>{{obj.text}}</p>
+                    <small>{{obj.date}}</small>
+                  </div>
+                  
+                  <div class="box2">
+                    <img src="{{obj.comentario.post_comentario.imagem_post.url}}" alt="post">
+                  </div>
+                </a>
+
+              {% elif obj.notification_type == 1 %}
+                <a href="{% url 'post_detalhe' obj.post.id %}">
+                  <div class="box">
+                    {% if obj.user_from.imagem %}
+                      <img src="{{ obj.user_from.imagem.url }}" alt="foto-perfil">
+                    {% else %}
+                      <img src="{% static 'img/profile-user.png' %}" alt="foto-perfil">
+                    {% endif %}
+                  </div>
+
+                  <div class="box1">
+                    <span>{{ obj.user_from.first_name }} {{obj.user_from.last_name}}</span><br>
+                    <span>Fez uma nova postagem:</span>
+                    <p>{{obj.text}}</p>
+                    <small>{{obj.date}}</small>
+                  </div>
+                  <div class="box2">
+                    <img src="{{obj.post.imagem_post.url}}" alt="post">
+                  </div>
+                </a>
+              {% endif %}
+            {% endfor %}
+          {% else %}
+              <h1>Nenhuma notificação</h1>
+          {% endif %} 
+        </div>
+      </div>
+    </div>
+    {% endif %}
+</header>

@@ -6,28 +6,33 @@
 
 /* Cards para exibir o conteudo das publicações dos posts */
 .cards {
-  margin: 20px;
   display: flex;
   flex-direction: column;
   text-align: center;
+  position: relative;
+  top: 55px;
 }
 
-.cards h2 {
+.cards .cards-box {
+  margin: 20px;
+}
+
+.cards .cards-box h2 {
   margin-top: 2rem;
   font-size: 2rem;
 }
 
-.cards h5 {
+.cards .cards-box h5 {
   font-size: 1rem;
   margin-top: 2rem;
   line-height: 1.5;
 }
 
-.cards small {
+.cards .cards-box small {
   margin-top: 1rem;
   color: #6c757d;
 }
-.cards img {
+.cards .cards-box img {
   margin-top: 4rem;
   margin-bottom: 1rem;
   width: 100%;
@@ -36,7 +41,7 @@
 /* Container para exibição dos comentários */
 .comments {
   margin: 20px;
-  margin-top: 4rem;
+  margin-top: 5rem;
   word-wrap: break-word;
 }
 

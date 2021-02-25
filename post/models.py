@@ -5,6 +5,9 @@ from django.utils import timezone
 from PIL import Image
 from django.conf import settings
 import os
+from notificaçoes.models import Notification
+from django.db.models.signals import post_save
+from django.contrib.admin.models import LogEntry
 
 # Create your models here.
 
@@ -46,3 +49,13 @@ class Post(models.Model):
         )
         nova_imagem.close()
     
+    def post_notification(sender, instance, created, **kwargs):
+        posts = instance
+        post_autor = posts.autor_post
+        if created:
+            if posts.publicado_post == True:
+                for users in User.objects.all():
+                    notificacao = Notification(post=posts, user_from=post_autor, user_to=users, text=titulo, notification_type=1)
+                    notificacao.save()
+
+post_save.connect(Post.post_notification, sender=Post)

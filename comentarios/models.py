@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from post.models import Post
 from django.utils import timezone
 from django.conf import settings
+from notificaçoes.models import Notification
+
+from django.db.models.signals import post_save
 
 class Comentarios(models.Model):
     nome = models.CharField(max_length=250)
@@ -28,3 +31,15 @@ class Resposta(models.Model):
     resposta_comentario = models.ForeignKey(Comentarios, on_delete=models.CASCADE)
     data_resposta = models.DateTimeField(default=timezone.now)
     publicado_resposta = models.BooleanField(default=True)
+
+
+    def resp_comment(sender, instance, *args, **kwargs):
+        resp = instance
+        user_from = resp.profile
+        user_to = resp.resposta_comentario
+        text = resp.resposta[:10]
+        if user_from != user_to.usuario_comentario:
+            notificacao = Notification(comentario=user_to, user_from=user_from, user_to=user_to.usuario_comentario, text=text, notification_type=2)
+            notificacao.save()
+            
+post_save.connect(Resposta.resp_comment, sender=Resposta)

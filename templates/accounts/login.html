@@ -37,32 +37,34 @@
       <form action="{% url 'login' %}" method="POST" name="form-login">
         {% csrf_token %}
         <fieldset>
-          {% if messages %}
-            {% for message in messages %}
-              <div class="{{ message.tags }}" role="alert">
-                {{ message }}
-              </div>
-            {% endfor %}
-          {% endif %}
-          <div class="input-block">
-            <label for="user">Login:</label><br />
-            <i class="fas fa-user-circle"></i>
-            <input type="text" name="user" value="{{request.POST.user}}" id="user" placeholder="User" />
-          </div>
-
-          <div class="input-block">
-            <label for="password">Senha:</label><br />
-            <i id="senha" class="fas fa-lock"></i>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
-            />
-          </div>
-
-          <div class="input-block">
-            <a href="{% url 'register' %}">Cadastra-se</a>
+          <div class="box-login">
+            {% if messages %}
+              {% for message in messages %}
+                <div class="{{ message.tags }}" role="alert">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+            <div class="input-block">
+              <label for="user">Login:</label><br />
+              <i class="fas fa-user-circle"></i>
+              <input type="text" name="user" value="{{request.POST.user}}" id="user" placeholder="User" />
+            </div>
+  
+            <div class="input-block">
+              <label for="password">Senha:</label><br />
+              <i id="senha" class="fas fa-lock"></i>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+              />
+            </div>
+  
+            <div class="input-block">
+              <a href="{% url 'register' %}">Cadastra-se</a>
+            </div>
           </div>
         </fieldset>
         

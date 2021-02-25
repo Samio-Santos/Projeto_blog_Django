@@ -5,6 +5,9 @@ form {
 fieldset {
   border: none;
   padding: 1rem;
+}
+
+.box-login {
   margin-top: 15vh;
 }
 
@@ -107,7 +110,6 @@ footer {
   margin-left: 0.5rem;
   padding: 1rem;
   border-radius: 5px;
-  margin-bottom: 3rem;
 }
 
 .alert-error {
@@ -117,7 +119,8 @@ footer {
   width: 80%;
   padding: 1rem;
   border-radius: 5px;
-  margin-bottom: 3rem;
+  position: relative;
+  bottom: 1rem;
 }
 
 @media (min-width: 700px) {
@@ -149,7 +152,7 @@ footer {
   .alert-error, .alert-success {
     width: 30%;
     position: relative;
-    bottom: 50px;
+    bottom: 25px;
     left: 30px;
     margin: 0 auto;
   }
