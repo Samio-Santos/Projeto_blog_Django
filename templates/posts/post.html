@@ -1,5 +1,7 @@
 {% load static %}
 {% load humanize %}
+{% load filters %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -22,6 +24,8 @@
       href="{% static 'fontawesome-free-5.13.0-web/css/solid.css' %}"
       rel="stylesheet"
     />
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </head>
   <body>
     {% include 'parciais/menu_base.html' %}
@@ -61,7 +65,7 @@
 
               <!-- botão para exibir ou ocultar container de resposta -->
               {% if comment.num_resp %}
-                <small id="{{comment.nome}}" class="button-resp" onclick="mostraDiv('{{comment.id}}', '{{comment.nome}}', '{{comment.num_resp}}')">Ver {{comment.num_resp}} respostas</small>
+                <small id="{{comment.nome}}" class="button-resp" onclick="mostraDiv('{{comment.id}}', '{{comment.nome}}', '{{comment.num_resp}}')">{{comment.num_resp|plural_resposta}}</small>
               {% endif %}
 
               <!-- Container para exibir respostas nos comentários -->
@@ -69,14 +73,16 @@
                 {% for obj in resp %}
                     {% if obj.resposta_comentario == comment %}
                       <div class="block-resp">
-                        <input type="hidden" name="user_id" value={{user.id}}>
-                        {% if obj.profile.imagem %}
-                          <img src="{{ obj.profile.imagem.url }}" alt="foto-perfil">
-                        {% else %}
-                          <img src="{% static 'img/profile-user.png' %}" alt="foto-perfil">
-                        {% endif %}
-                        <small>{{obj.profile.first_name }} {{ obj.profile.last_name }} | {{ obj.data_resposta}}</small>
-                        <p>{{ obj.resposta }}</p>
+                        <div>
+                          <input type="hidden" name="user_id" value={{user.id}}>
+                          {% if obj.profile.imagem %}
+                            <img src="{{ obj.profile.imagem.url }}" alt="foto-perfil">
+                          {% else %}
+                            <img src="{% static 'img/profile-user.png' %}" alt="foto-perfil">
+                          {% endif %}
+                          <small>{{obj.profile.first_name }} {{ obj.profile.last_name }} | {{ obj.data_resposta}}</small>
+                          <p>{{ obj.resposta }}</p>
+                        </div>
                       </div>
                     {% endif %}
                   {% endfor %}
@@ -88,11 +94,11 @@
                 </div>
               {% endif %}
 
-              {% if user.is_authenticated %}
+              {% if user.is_authenticated%}
                 <div class="resp">
-                  <form action="#RespostaEnviada" method="POST">
+                  <form id="resp_comment" action="#RespostaEnviada" method="POST">
                     {% csrf_token %}
-                    <input type="hidden" name="comment_id" value={{comment.id}}>
+                    <input id="comment_id" type="hidden" name="comment_id" value={{comment.id}}>
                     <input type="hidden" name="user_id" value={{user.id}}>
                     <div class="form-resp">
                       {{formResp.resposta}}
@@ -106,19 +112,13 @@
         </div>
         {% endif %}
 
-        {% if messages %}
-          {% for message in messages %}
-          <div class="alert {{ message.tags }}" role="alert">
-              {{ message }}
-          </div>
-          {% endfor %}
-        {% endif %}
-        
         {% if not user.is_authenticated %}
           <div class="contact">
             <h1>Deixe um comentário</h1>
-            <form action="{% url 'post_detalhe' post.id %}" method="POST">
+            <form id="comment-form" action="{% url 'post_detalhe' post.id %}" method="POST">
+              <input type="hidden" id="url" value="{% url 'post_detalhe' post.id %}">
               {% csrf_token %}
+              <div class="mensagem"></div>
               <div class="box-input">
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" id="nome">
@@ -131,8 +131,18 @@
 
               <div class="box-input">
                 <label for="body">Comentário:</label>
-                <textarea name="comentario" cols="30" rows="10" id="body"></textarea>
+                <textarea id="comment-post" name="comentario" cols="30" rows="10" id="body" required></textarea>
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="{{ message.tags }}" role="alert">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                {% endif %}
               </div>
+
+              <div class="g-recaptcha" data-sitekey="6Le_dXgaAAAAAGM7OgivgCcL__BlRdpVJTRhfFfj"></div>
+              <br>
 
               <button type="submit" name="submit_comment" title="Enviar Formulário">Enviar</button>
             </form>
@@ -141,8 +151,9 @@
         {% else %}
           <div class="contact">
             <h1>Deixe um comentario:</h1>
-            <form action="{% url 'post_detalhe' post.id %}" method="POST">
+            <form id="comment-form" action="{% url 'post_detalhe' post.id %}" method="POST">
               {% csrf_token %}
+              <input type="hidden" id="url" value="{% url 'post_detalhe' post.id %}">
               <input type="hidden" name="user_id" value={{user.id}}>
               <div class="box-img">
                 {% if user.imagem %}
@@ -152,7 +163,7 @@
                 {% endif %}
                   <p>{{user.first_name}} {{user.last_name}}</p>
               </div>
-
+              
               <div class="box-input" style="display: none;">
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" value="{{user.first_name}} {{user.last_name}}" id="nome">
@@ -162,12 +173,13 @@
                 <label for="email">E-mail:</label>
                 <input type="email" name="email" value="{{user.email}}" id="nome">
               </div>
-
+              <div class="mensagem"></div>
               <div class="box-input">
                 <label for="body">Comentário:</label>
-                <textarea name="comentario" cols="30" rows="10" id="body"></textarea>
+                <textarea id="comment-post" name="comentario" cols="30" rows="10" id="body"></textarea>
               </div>
-
+              <div class="g-recaptcha" data-sitekey="6Le_dXgaAAAAAGM7OgivgCcL__BlRdpVJTRhfFfj"></div>
+              <br>
               <button type="submit" name="submit_comment" title="Enviar Formulário">Enviar</button>
             </form>
           </div>

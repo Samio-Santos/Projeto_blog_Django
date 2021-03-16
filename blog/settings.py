@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 from django.contrib.messages import constants
+from datetime import timedelta
+from django.shortcuts import redirect
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'blog_email',
     'notificaçoes',
     'social_django',
+    'post.templatetags.filters',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'axes',
 ] 
 
 MIDDLEWARE = [
@@ -57,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'blog.urls'
@@ -160,6 +165,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Configuração rede social
 AUTHENTICATION_BACKENDS = (
+    'axes.backends.AxesBackend',
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.google.GoogleOAuth2',
@@ -175,8 +181,28 @@ SOCIAL_AUTH_FACEBOOK_SECRET = 'd68fed2d64092e2cb32bc5fadf800682'
 SOCIAL_AUTH_GITHUB_KEY = 'a4a0697de7ac8fb277e2'
 SOCIAL_AUTH_GITHUB_SECRET = '35585559b09ce930e09bfa9cf1327ae469766ff4'
 
+# Autenticação pelo Google
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '955161584054-ocobrnmng47tj4625kk4rtsbojqbukjf.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'EOQ-7TD62FBMBmNfdwqulvgy'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+
+##### CONFIGURAÇÕES DO DO AXE #####
+
+# Defini o limite de tentativas do usuario
+AXES_FAILURE_LIMIT = 5
+
+# # AXES_ENABLE_ADMIN = True
+
+# Bloqueia com base no nome do usuario
+AXES_ONLY_USER_FAILURES = True
+
+# redefini o numero de tentativas após UMA tentativa bem-sucedida
+AXES_RESET_ON_SUCCESS = True
+
+# Defini o tempo de bloqueio
+AXES_COOLOFF_TIME = timedelta(minutes=30)
+
+AXES_LOCKOUT_URL = '/accounts/locked/'

@@ -1,4 +1,6 @@
-{% load static %} {% load humanize %}
+{% load static %} 
+{% load humanize %}
+{% load filters %}
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -33,6 +35,7 @@
             </div>
           {% endfor %}
         {% endif %}
+
         <article class="flex-container">
           {% for post in posts %} 
             <div class="cards">
@@ -43,24 +46,30 @@
                 <h3>{{ post.titulo_post }}</h3>
               </a>
               <p>{{post.resumo_post}}</p>
-              <span>
-                {{post.data_post|naturalday}} | {{ post.numero_comentarios }} | {{ post.categoria_post }}
-              </span><br />
+
+              <div class="info">
+                <span>
+                  {{post.data_post|naturalday}} | {{ post.numero_comentarios|plural_comentarios }} | {{ post.categoria_post }}
+                </span>
+              </div>
+              
               <a href="{% url 'post_detalhe' post.id %}" class="button">Ler mais...</a>
             </div>
           {% endfor %}
         </article>
+
       </section>
+
       <ul class="pagination">
         {% if posts.has_previous %}
-        <li>
-          <a id="next" href="?p=1">&laquo;</a>
-        </li>
+          <li>
+            <a id="next" href="?p=1">&laquo;</a>
+          </li>
 
-        <li>
-          <a id="next" href="?p={{ posts.previous_page_number }}">&lsaquo;</a>
-        </li>
-      {% endif %}
+          <li>
+            <a id="next" href="?p={{ posts.previous_page_number }}">&lsaquo;</a>
+          </li>
+        {% endif %}
       
         {% for paginas in posts.paginator.page_range %}
           {% if posts.number == paginas %}
@@ -89,7 +98,6 @@
         {% endif %}
       </ul>
     </main>
-
   <footer>
     <p>&copy; | Desenvolvido por Samio Santos</p>
   </footer>

@@ -36,7 +36,6 @@ header {
   background-color: #6d4a76;
   position: fixed;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   z-index: 1;
 }
@@ -44,6 +43,7 @@ header {
 .container h1 {
   font-size: 20px;
   margin-left: 1rem;
+  margin-top: 1.29rem;
 }
 
 .container #icone-login {
@@ -92,9 +92,10 @@ header {
   margin-right: 3rem;
   font-family: sans-serif;
   position: relative;
+  margin-top: .5rem;
 }
 
-.container-img #search-img {
+.container-img .search-img {
   display: none;
 }
 
@@ -111,7 +112,7 @@ header {
   background-color: red;
 }
 .container-img .notification {
-  margin-right: 1rem;
+  margin-right: .5rem;
   height: 1.7rem;
 }
 
@@ -190,6 +191,13 @@ header {
   box-sizing: border-box;
 }
 
+.dropdown-notification h1 {
+  font-size: 25px;
+  padding: 12px 16px;
+  color: black;
+  margin-bottom: 20px;
+}
+
 /* Personalização do scroll do container .dropdown-notification */
 /* width */
 .dropdown-notification::-webkit-scrollbar {
@@ -252,7 +260,6 @@ header {
 .box-notification a .box1 p,
 .box-notification a .box1 small {
   margin-left: 10px;
-  /* line-height: 3; */
 }
 
 .box-notification a .box1 p {
@@ -291,6 +298,7 @@ header {
 
 .form-block {
   width: 30%;
+  margin-top: 1rem;
 }
 
 .form-block .pesquisa {
@@ -348,14 +356,20 @@ footer {
 }
 
 @media only screen and (min-device-width: 360px) and (max-device-width: 640px) {
-  #form-search {
-    display: none;
+  .container-img .search-img {
+    display: inline-block;
+    margin-right: .5rem;
+    height: 1.6rem;
+  }
+  
+  .container h1 {
+    width: 60px;
+    word-wrap: break-word;
+    font-size: 17px;
   }
 
-  .container-img #search-img {
+  .show-search {
     display: inline-block;
-    margin-right: 1rem;
-    height: 1.6rem;
   }
 }
 
@@ -398,6 +412,10 @@ footer {
     padding: 5px;
     padding-right: 30px;
     margin: 2px;
+  }
+
+  .form-block {
+    margin-top: 1rem;
   }
 
   form i {

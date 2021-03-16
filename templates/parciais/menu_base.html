@@ -12,7 +12,7 @@
 <header>
     <div class="container">
       <a href="{% url 'index' %}">
-        <h1 id="title">Blog Samio</h1>
+        <h1>Blog</h1>
       </a>
     </div>
     {% if not user.is_authenticated %}
@@ -25,7 +25,7 @@
         </li>
         <li><a href="{% url 'post_categoria' 'sistemas' %}">Sistemas</a></li>
 
-        <div class="form-block">
+        <div class="form-block" style="margin-top: initial;">
           <form class="box-form" action="{% url 'busca_post' %}">
             <i class="fas fa-search"></i>
             <input
@@ -63,8 +63,6 @@
       </form>
     </div>
     <div class="container-img">
-      <img id="search-img" src="{% static 'img/procurar.png' %}" alt="pesquisar" onclick="search()">
-
       {% if count_notification %}
         <span id="count-notification">{{count_notification}}</span>
       {% endif %}

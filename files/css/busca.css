@@ -34,9 +34,8 @@
   border: 0.3px solid #6c757d;
   border-radius: 4px;
   word-wrap: break-word;
-  margin: 10px;
-  margin-bottom: 20px;
   position: relative;
+  margin-top: 75px;
   flex: 0 0 85%; /* define se os cards ficam na mesma linha */
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.185);
 }
@@ -126,6 +125,18 @@ ul.pagination li a:hover,
 a#before:hover,
 a#next:hover {
   background-color: #ddd;
+}
+.alert-success {
+  text-align: center;
+  background-color: rgba(0, 128, 0, 0.233);
+  color: green;
+  width: 50%;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
+  top: 4.5rem;
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 700px) {

@@ -9,6 +9,9 @@ from comentarios.forms import FormComentario, FormResposta
 from django.contrib.auth.models import User
 from notificaçoes.models import Notification
 
+from django.http import JsonResponse
+from django.core import serializers
+
 
 def index(request):
     data = {}
@@ -74,16 +77,17 @@ def post(request, id):
             if form.is_valid():
                 comentario = Comentarios(**form.cleaned_data)
                 comentario.post_comentario = post
-                comentario.usuario_comentario =  User.objects.get(id=request.POST.get('user_id'))
+                comentario.usuario_comentario = User.objects.get(id=request.POST.get('user_id'))
                 comentario.save()
-                messages.success(request, 'Comentário enviado com sucesso!')
+                comments_ajax = serializers.serialize("json", [comentario, ])
+                return JsonResponse({"new_comment": comments_ajax}, status=200)
                 
             if formResp.is_valid():
                 resposta = Resposta(**formResp.cleaned_data)
                 resposta.profile = User.objects.get(id=request.POST.get('user_id'))
                 resposta.resposta_comentario = Comentarios.objects.get(id=request.POST.get('comment_id'))
                 resposta.save()
-                formResp = FormResposta()
+                return redirect('post_detalhe', post.id)
 
 
         data['post'] = post
@@ -106,7 +110,8 @@ def post(request, id):
                 comentario = Comentarios(**form.cleaned_data)
                 comentario.post_comentario = post
                 comentario.save()
-                messages.success(request, 'Comentário enviado com sucesso!')
+                comments_ajax = serializers.serialize("json", [comentario, ])
+                return JsonResponse({"new_comment": comments_ajax}, status=200)
 
         data['post'] = post
         data['form'] = form

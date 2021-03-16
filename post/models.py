@@ -7,7 +7,6 @@ from django.conf import settings
 import os
 from notificaçoes.models import Notification
 from django.db.models.signals import post_save
-from django.contrib.admin.models import LogEntry
 
 # Create your models here.
 

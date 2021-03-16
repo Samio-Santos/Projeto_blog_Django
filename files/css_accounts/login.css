@@ -38,6 +38,15 @@ fieldset {
   border: 1.5px solid #6d4a76;
 }
 
+.box-password {
+  width: 0;
+  height: 0;
+  position: relative;
+  float: right;
+  right: 115px;
+  top: 1.1rem;
+}
+
 .conect {
   display: flex;
   align-items: center;
@@ -48,7 +57,6 @@ fieldset {
   padding-left: 1rem;
   height: 2rem;
 }
-
 
 form button {
   width: 25%;
@@ -74,7 +82,7 @@ form i {
 
 form h5 {
   padding-left: 1rem;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   text-align: center;
 }
 
@@ -123,8 +131,23 @@ footer {
   bottom: 1rem;
 }
 
-@media (min-width: 700px) {
-  .input-block, form .button-block {
+@media only screen and (min-device-width: 260px) and (max-device-width: 640px) {
+  .box-password {
+    position: relative;
+    right: 90px;
+  }
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) {
+  .box-password {
+    position: relative;
+    right: 100px;
+  }
+}
+
+@media (min-width: 535px) {
+  .input-block,
+  form .button-block, .box-password {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -133,7 +156,20 @@ footer {
   .input-block label {
     margin-top: 10px;
   }
-  
+
+  .box-password {
+    position: relative;
+    right: 20px;
+    top: 5px;
+    border: 1px solid red;
+    width: 0;
+    height: 0;
+  }
+
+  .box-password label img{
+    cursor: pointer;
+  }
+
   .input-block input {
     width: 30%;
     margin: 5px;
@@ -144,12 +180,13 @@ footer {
     left: 27px;
     margin-bottom: 10px;
   }
-  
+
   form .button-block button {
     width: 10%;
   }
 
-  .alert-error, .alert-success {
+  .alert-error,
+  .alert-success {
     width: 30%;
     position: relative;
     bottom: 25px;

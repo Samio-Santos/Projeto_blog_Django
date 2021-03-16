@@ -21,7 +21,7 @@
   word-wrap: break-word;
   position: relative;
   margin-top: 75px;
-  flex: 0 0 85%; /* define se os cards ficam na mesma linha */
+  flex: 0 0 75%; /* define se os cards ficam na mesma linha */
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.185);
 }
 
@@ -42,13 +42,14 @@
 }
 
 .cards h3,
-.cards p,
-.cards span {
+.cards p {
   margin: 1rem;
   margin-bottom: 10px;
 }
 
-
+.cards .info {
+  margin: 1rem;
+}
 .cards h3:hover {
   color: black;
   text-decoration: underline;
@@ -137,6 +138,12 @@ a#next:hover {
   position: relative;
   margin-bottom: 1rem;
   top: 4.5rem;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 640px) {
+  .cards {
+    flex: 0 0 90%;
+  }
 }
 
 @media (min-width: 700px) {

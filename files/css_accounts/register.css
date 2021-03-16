@@ -60,6 +60,45 @@ form button:hover {
   margin-bottom: 3rem;
 }
 
+/* A caixa de mensagem é mostrada quando o usuário clica no campo de senha  */
+#Valid-password {
+  /* display:none; */
+  width: 100%;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+
+}
+
+#Valid-password p {
+  padding: 10px 35px;
+  font-size: 18px;
+}
+
+/* Adicione uma cor de texto verde e uma marca de seleção quando os requisitos estiverem corretos */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+/* Adicione uma cor de texto vermelha e um "x" quando os requisitos estiverem incorretos */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+
 @media (min-width: 700px) {
   .input-block, .alert-error {
     margin-left: 150px;
@@ -77,5 +116,10 @@ form button:hover {
 
   .alert-error {
     width: 52%;
+  }
+
+  #Valid-password {
+    width: 56%;
+    margin-left: 150px;
   }
 }
