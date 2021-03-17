@@ -32,7 +32,8 @@ class Resposta(models.Model):
     data_resposta = models.DateTimeField(default=timezone.now)
     publicado_resposta = models.BooleanField(default=True)
 
-
+    # Envia uma notificação ao usuário do comentario caso ele esteja registrado no sistema.
+    # Informando que outro usuario respondeu seu comentario.
     def resp_comment(sender, instance, *args, **kwargs):
         resp = instance
         user_from = resp.profile

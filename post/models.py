@@ -48,6 +48,7 @@ class Post(models.Model):
         )
         nova_imagem.close()
     
+    # Envia uma notificação para todos os usuarios quando um novo post no blog é feito.
     def post_notification(sender, instance, created, **kwargs):
         posts = instance
         post_autor = posts.autor_post

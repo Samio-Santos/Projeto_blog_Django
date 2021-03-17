@@ -69,7 +69,7 @@ def post(request, id):
         user = request.user
         notification = Notification.objects.filter(user_to=user).order_by('-date')
         count = Notification.objects.filter(user_to=user, is_seen=False).update(is_seen=True)
-                
+            
         if not post.publicado_post:
             raise Http404()
 

@@ -15,7 +15,4 @@ class Notification(models.Model):
     is_seen = models.BooleanField(default=False)
 
 
-    def num_resp(self):
-        return self.notification_set.all().count()
-
     
