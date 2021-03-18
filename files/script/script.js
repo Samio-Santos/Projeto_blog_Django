@@ -175,23 +175,21 @@ function createComment(formData, url) {
       "X-Requested-With": "XMLHttpRequest",
     },
     body: formData,
-  })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function () {
-      commentForm.reset();
-      let mensagem = document.querySelector(".mensagem");
-
-      mensagem.innerHTML += `
-      <div class="alert-success">
-          Comentário enviado para analise com sucesso.
-      </div>
+  }).then(function (response) {
+    return response.json();
+  }).then(function () {
+    commentForm.reset();
+    let mensagem = document.querySelector(".mensagem");
+    
+    mensagem.innerHTML += `
+    <div class="alert-success">
+    Comentário enviado para analise com sucesso.
+    </div>
     `;
-    })
-    .catch((error) => {
-      console.error("Error", error);
-    });
+  }).catch((error) => {
+    console.error("Error", error);
+  });
+  console.log(formData)
 }
 
 function submitComment(e) {
