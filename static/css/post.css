@@ -1,0 +1,252 @@
+.box-container {
+  width: 100%;
+  font-family: sans-serif;
+  margin: 0 auto;
+}
+
+/* Cards para exibir o conteudo das publicações dos posts */
+.cards {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  top: 55px;
+}
+
+.cards .cards-box {
+  margin: 20px;
+}
+
+.cards .cards-box h2 {
+  margin-top: 2rem;
+  font-size: 2rem;
+}
+
+.cards .cards-box h5 {
+  font-size: 1rem;
+  margin-top: 2rem;
+  line-height: 1.5;
+}
+
+.cards .cards-box small {
+  margin-top: 1rem;
+  color: #6c757d;
+}
+.cards .cards-box img {
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+/* Container para exibição dos comentários */
+.comments {
+  margin: 20px;
+  margin-top: 5rem;
+  word-wrap: break-word;
+}
+
+.comments .item {
+  background-color: rgba(245, 245, 245, 0.267);
+  border: 1px solid #e6e6f0;
+  border-radius: 0.4rem;
+  margin-top: 2.4rem;
+}
+
+.comments .item .comments-container {
+  padding: 1.2rem 1.4rem;
+  display: flex;
+  align-items: center;
+}
+
+.comments .item img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.comments .item .comments-container div {
+  margin-left: 0.7rem;
+}
+
+.comments .item .comments-container div strong {
+  font: 700 16px sans-serif;
+  display: block;
+}
+
+.comments .item .comments-container div span {
+  font-size: 13px;
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.comments .item .button-resp,
+.comments .item .resp .form-resp #id_resposta,
+.item #button-comments {
+  margin: 0.7rem;
+  margin-left: 2.2rem;
+}
+
+.comments .item b,
+.comments .item p {
+  margin-left: 2.2rem;
+  margin-top: 0.2rem;
+}
+
+.comments .item .resp #button-comments {
+  width: 20%;
+}
+
+.comments .item .resp .form-resp #id_resposta {
+  width: 85%;
+  height: 3rem;
+}
+
+.comments .item .block-a {
+  text-align: right;
+  font-size: 10px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+.comments .item .block-a a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+/* Container para exibir as respostas nos comentários */
+.item .block-resp {
+  width: 80%;
+  height: 5%;
+  background-color: rgba(128, 128, 128, 0.5);
+  word-wrap: break-word;
+  position: relative;
+  left: 3rem;
+  margin-top: 1rem;
+  border-radius: 4px;
+}
+
+.item .block-resp img {
+  width: 2rem;
+  height: 2rem;
+  position: relative;
+  top: 5px;
+  left: 7px;
+  border-radius: 50%;
+}
+
+.item .block-resp small {
+  font-weight: bolder;
+  color: #6c757d;
+  position: absolute;
+  font-size: 10px;
+  padding: 2px;
+  top: 10px;
+  left: 2.6rem;
+}
+
+.item .block-resp p {
+  padding: 1rem;
+  line-height: 1.5;
+  position: relative;
+  bottom: 1rem;
+}
+
+.item .button-resp {
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+/* Container para fazer um comentário com usuario */
+.contact {
+  margin: 20px;
+}
+
+.contact h1 {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  font-size: 30px;
+}
+
+.contact .box-input {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #dee2e6;
+}
+
+.contact .box-input label,
+.box-input input,
+.box-input textarea {
+  margin-top: 10px;
+}
+
+.contact .box-input input,
+textarea {
+  width: 70%;
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.404);
+  border-radius: 3px;
+  outline: none;
+  margin-bottom: 1rem;
+  resize: vertical;
+}
+
+.box-input input:focus,
+textarea:focus {
+  border: 1.5px solid #6d4a76;
+}
+
+.contact .box-img img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+}
+
+.contact .box-img p {
+  font-weight: bolder;
+}
+
+form button {
+  width: 20%;
+  padding: 10px;
+  border-radius: 3px;
+  border: none;
+  background-color: #6d4a76;
+  color: white;
+  cursor: pointer;
+  transition: 1s;
+  margin-bottom: 4rem;
+}
+
+form button:hover {
+  background-color: #370344;
+}
+
+/* Mensagem de alertas */
+.alert-success {
+  text-align: center;
+  background-color: rgba(0, 128, 0, 0.233);
+  color: green;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 700px) {
+  .box-container {
+    width: 60%;
+  }
+
+  .contact .box-input input,
+  textarea {
+    width: 60%;
+  }
+
+  .cards img {
+    height: auto;
+  }
+}

@@ -29,7 +29,7 @@ SECRET_KEY = 'tx82rt7q0@so==u^m9nbleolqou8*p8(4^-&q3s^%h(^xfb&8y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["samysantos10.pythonanywhere.com"]
 
 
 # Application definition
@@ -91,13 +91,13 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+  'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blog_django',
-        'HOST': '127.0.0.1',
+        'NAME': 'samysantos10$Blog',
+        'HOST': 'samysantos10.mysql.pythonanywhere-services.com',
         'PORT': '3306',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'samysantos10',
+        'PASSWORD': 'S@my4667',
     }
 }
 
@@ -140,7 +140,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = 'static'
+STATIC_ROOT = '/home/samysantos10/Projeto_blog_Django/static'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "files"),)
 
@@ -206,3 +206,16 @@ AXES_RESET_ON_SUCCESS = True
 AXES_COOLOFF_TIME = timedelta(minutes=30)
 
 AXES_LOCKOUT_URL = '/accounts/locked/'
+
+
+
+SECURE_PROXY_SSL_HEADER = None
+SECURE_SSL_REDIRECT = None
+SESSION_COOKIE_SECURE = None
+CSRF_COOKIE_SECURE = None
+
+try:
+    from .local_settings import *
+
+except:
+    pass
