@@ -27,12 +27,21 @@
     {% include 'parciais/menu_base.html' %}
     <main>
       <section class="container2">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="{{ message.tags }}" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
         <article class="flex-container">
           {% if posts %} 
             {% for post in posts %}
                 <div class="cards">
                   {% if post.imagem_post %}
-                  <img src="{{ post.imagem_post.url }}" alt="My image" />
+                    <img src="{{ post.imagem_post.url }}" alt="My image" />
+                  {% else %}
+                    <img src="{% static 'img/unnamed.png' %}" alt="Sem-imagem" />
                   {% endif %}
                   <a href="{% url 'post_detalhe' post.id %}"
                     ><h3>{{ post.titulo_post }}</h3></a

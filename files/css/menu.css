@@ -294,6 +294,26 @@ header {
   border-bottom: 0.2px solid rgba(255, 255, 255, 0.5);
 }
 
+.dropdown-notification .delete {
+  padding: 9px;
+  width: 100%;
+  font-weight: bold;
+  font-size: 15px;
+  
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+.dropdown-notification .delete img {
+  position: relative;
+  float: right;
+  height: 15px;
+}
+
+
 /* Campo de pesquisa, login e cadastro */
 
 .form-block {

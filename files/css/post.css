@@ -209,24 +209,30 @@ textarea:focus {
   font-weight: bolder;
 }
 
-form button {
+.contact form button:disabled {
+  background-color: #b3a4c7;
+}
+
+.contact form button {
   width: 20%;
   padding: 10px;
   border-radius: 3px;
   border: none;
   background-color: #6d4a76;
   color: white;
-  cursor: pointer;
+  cursor: not-allowed;
   transition: 1s;
   margin-bottom: 4rem;
+  outline: none;
 }
 
-form button:hover {
+.contact form button:not([disabled]):hover {
   background-color: #370344;
 }
 
 /* Mensagem de alertas */
-.alert-success {
+
+.success {
   text-align: center;
   background-color: rgba(0, 128, 0, 0.233);
   color: green;
@@ -234,6 +240,32 @@ form button:hover {
   padding: 1rem;
   border-radius: 5px;
   margin-bottom: 3rem;
+}
+
+.alert-success {
+  text-align: center;
+  background-color: rgba(0, 128, 0, 0.233);
+  color: green;
+  width: 80%;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
+  top: 4.5rem;
+  margin-bottom: 1rem;
+}
+
+.alert-error {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.233);
+  color: red;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
+  margin-bottom: 1rem;
+  top: 4.5rem;
 }
 
 @media (min-width: 700px) {

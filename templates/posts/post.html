@@ -31,6 +31,13 @@
     {% include 'parciais/menu_base.html' %}
     <main>
       <section class="box-container">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="{{ message.tags }}" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
         <div class="cards">
           <div class="cards-box">
             <h2>{{ post.titulo_post }}</h2>
@@ -51,8 +58,11 @@
               <input type="hidden" name="comment_id" value={{comment.id}}>
 
               <div class="comments-container">
-                {% if comment.usuario_comentario.imagem %}
+                {% if comment.usuario_comentario.imagem  %}
                   <img src="{{ comment.usuario_comentario.imagem.url}}" alt="foto-perfil">
+                  
+                {% elif comment.usuario_comentario %}
+                  <img src="{% static 'img/profile-user.png' %}" alt="foto-perfil">
                 {% endif %}
                 <div>
                     <strong>{{comment.nome}}</strong>
@@ -88,13 +98,13 @@
                   {% endfor %}
               </div>
               
-              {% if not user.is_authenticated %}
+              {% if not user.is_authenticated and comment.usuario_comentario %}
                 <div class="block-a">
                   <a href="{% url 'login' %}">Faça login para responder {{comment.nome}}</a>
                 </div>
               {% endif %}
 
-              {% if user.is_authenticated%}
+              {% if user.is_authenticated and comment.usuario_comentario %}
                 <div class="resp">
                   <form id="resp_comment" action="#RespostaEnviada" method="POST">
                     {% csrf_token %}
@@ -116,35 +126,27 @@
           <div class="contact">
             <h1>Deixe um comentário</h1>
             <form id="comment-form" action="{% url 'post_detalhe' post.id %}" method="POST">
-              <input type="hidden" id="url" value="{% url 'post_detalhe' post.id %}">
               {% csrf_token %}
               <div class="mensagem"></div>
               <div class="box-input">
                 <label for="nome">Nome:</label>
-                <input type="text" name="nome" id="nome">
+                <input type="text" name="nome" id="nome" required>
               </div>
 
               <div class="box-input">
                 <label for="email">E-mail:</label>
-                <input type="email" name="email" id="email">
+                <input type="email" name="email" id="email" required>
               </div>
 
               <div class="box-input">
                 <label for="body">Comentário:</label>
                 <textarea id="comment-post" name="comentario" cols="30" rows="10" id="body" required></textarea>
-                {% if messages %}
-                  {% for message in messages %}
-                    <div class="{{ message.tags }}" role="alert">
-                      {{ message }}
-                    </div>
-                  {% endfor %}
-                {% endif %}
               </div>
 
-              <div class="g-recaptcha" data-sitekey="6Le_dXgaAAAAAGM7OgivgCcL__BlRdpVJTRhfFfj"></div>
+              <div class="g-recaptcha" data-sitekey="6Le_dXgaAAAAAGM7OgivgCcL__BlRdpVJTRhfFfj" data-callback="enableButton"></div>
               <br>
 
-              <button type="submit" name="submit_comment" title="Enviar Formulário">Enviar</button>
+              <button class="button" type="submit" name="submit_comment" title="Marque o captcha para ativar o botão" disabled>Enviar</button>
             </form>
           </div>
           
@@ -153,7 +155,6 @@
             <h1>Deixe um comentario:</h1>
             <form id="comment-form" action="{% url 'post_detalhe' post.id %}" method="POST">
               {% csrf_token %}
-              <input type="hidden" id="url" value="{% url 'post_detalhe' post.id %}">
               <input type="hidden" name="user_id" value={{user.id}}>
               <div class="box-img">
                 {% if user.imagem %}
@@ -166,21 +167,21 @@
               
               <div class="box-input" style="display: none;">
                 <label for="nome">Nome:</label>
-                <input type="text" name="nome" value="{{user.first_name}} {{user.last_name}}" id="nome">
+                <input type="text" name="nome" value="{{user.first_name}} {{user.last_name}}" id="nome" required>
               </div>
 
               <div class="box-input" style="display: none;">
                 <label for="email">E-mail:</label>
-                <input type="email" name="email" value="{{user.email}}" id="nome">
+                <input type="email" name="email" value="{{user.email}}" id="nome" required>
               </div>
               <div class="mensagem"></div>
               <div class="box-input">
                 <label for="body">Comentário:</label>
-                <textarea id="comment-post" name="comentario" cols="30" rows="10" id="body"></textarea>
+                <textarea id="comment-post" name="comentario" cols="30" rows="10" id="body" required></textarea>
               </div>
-              <div class="g-recaptcha" data-sitekey="6Le_dXgaAAAAAGM7OgivgCcL__BlRdpVJTRhfFfj"></div>
+              <div class="g-recaptcha" data-sitekey="6Le_dXgaAAAAAGM7OgivgCcL__BlRdpVJTRhfFfj" data-callback="enableButton"></div>
               <br>
-              <button type="submit" name="submit_comment" title="Enviar Formulário">Enviar</button>
+              <button class="button" type="submit" name="submit_comment" title="Marque o captcha para ativar o botão" disabled>Enviar</button>
             </form>
           </div>
         {% endif %}

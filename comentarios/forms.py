@@ -18,12 +18,6 @@ class FormComentario(forms.ModelForm):
 
         print(recaptcha_result)
 
-        if not recaptcha_result.get('success'):
-            self.add_error(
-                'comentario',
-                'Por favor, marque a caixa "Não sou um robô!"'
-            )
-
         cleaned_data = self.cleaned_data
         nome = cleaned_data.get('nome')
         email = cleaned_data.get('email')

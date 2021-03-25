@@ -40,8 +40,11 @@
           {% for post in posts %} 
             <div class="cards">
               {% if post.imagem_post %}
-              <img src="{{ post.imagem_post.url }}" alt="My image" />
+                <img src="{{ post.imagem_post.url }}" alt="My image" />
+              {% else %}
+                <img src="{% static 'img/unnamed.png' %}" alt="Sem-imagem" />
               {% endif %}
+
               <a href="{% url 'post_detalhe' post.id %}">
                 <h3>{{ post.titulo_post }}</h3>
               </a>
@@ -98,13 +101,11 @@
         {% endif %}
       </ul>
     </main>
-  <footer>
-    <p>&copy; | Desenvolvido por Samio Santos</p>
-  </footer>
-    
-  <script src="{% static 'script/script.js' %}"></script>
-  </body>
-</html>
+    <footer>
+      <p>&copy; | Desenvolvido por Samio Santos</p>
+    </footer>
+      
+    <script src="{% static 'script/script.js' %}"></script>
 
   </body>
 </html>

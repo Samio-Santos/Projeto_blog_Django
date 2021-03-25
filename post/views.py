@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from post.models import Post
 from comentarios.models import Comentarios, Resposta
 from django.http import Http404
@@ -222,3 +222,12 @@ def busca_post(request):
 
         data['posts'] = contatos
         return render(request, 'posts/busca_post.html', data)
+
+
+
+def delete_notification(request, id):
+    url = request.POST.get('urldinamica')
+    notification = get_object_or_404(Notification, id=id)
+    notification.delete()
+    messages.success(request, f'Notificação de "{notification.user_from.first_name} {notification.user_from.last_name}" excluida com sucesso!')
+    return redirect(url)

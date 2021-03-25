@@ -16,7 +16,7 @@ def login(request):
 
     if not user:
         messages.error(request, 'Usuário ou senha inválidos.')
-        return redirect('login')
+        return render(request, 'accounts/login.html')
 
     else:
         auth.login(request, user)

@@ -129,7 +129,15 @@
         <div class="box-notification">
           <h3>Notificações</h3>
           {% if notifications %}
-            {% for obj in notifications %}
+          {% for obj in notifications %}
+            <form action="{% url 'notification_delete' obj.id %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="urldinamica" value="{{request.build_absolute_uri}}">
+                <button type="submit" class="delete">
+                  <img src="{% static 'img/lixeira-aberta.png' %}" alt="Delete">
+                </button>
+              </form>
+              
               {% if obj.notification_type == 1 %}
                 <a href="{% url 'post_detalhe' obj.post.id %}">
                   <div class="box">
@@ -169,7 +177,11 @@
                   </div>
                   
                   <div class="box2">
-                    <img src="{{obj.comentario.post_comentario.imagem_post.url}}" alt="post">
+                    {% if obj.comentario.post_comentario.imagem_post %}
+                      <img src="{{obj.comentario.post_comentario.imagem_post.url}}" alt="post">
+                    {% else %}
+                      <img src="{% static 'img/unnamed.png' %}" alt="Sem-imagem" />
+                    {%endif%}
                   </div>
                 </a>
               {% endif %}

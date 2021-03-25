@@ -161,49 +161,35 @@ function mostraSenha() {
 
 // Funciobalidade com Ajax e Django
 // Quando o usuario fizer um comentário este código irá excultar
-let commentForm = document.getElementById("comment-form");
-if (commentForm) {
-  commentForm.addEventListener("submit", submitComment);
-}
 
-function createComment(formData, url) {
-  let csrfValue = document.getElementsByName("csrfmiddlewaretoken")[0].value;
-  fetch(url, {
-    method: "Post",
-    headers: {
-      "X-CSRFToken": csrfValue,
-      "X-Requested-With": "XMLHttpRequest",
-    },
-    body: formData,
-  }).then(function (response) {
-    return response.json();
-  }).then(function () {
-    commentForm.reset();
-    let mensagem = document.querySelector(".mensagem");
-    
-    mensagem.innerHTML += `
-    <div class="alert-success">
-    Comentário enviado para analise com sucesso.
-    </div>
-    `;
-  })
-  // .catch((error) => {
-  //   console.error("Error", error);
-  // });
-  console.log(formData)
-}
-
-function submitComment(e) {
-  e.preventDefault();
-  // url do post
-  let url = document.getElementById("url").value;
-  // Comentario do post
-  let content = document.querySelector("#comment-post").value;
-
-  if (content) {
-    let formData = new FormData(commentForm);
-    createComment(formData, url);
-  } else {
-    console.log("You cannot submit an empty form");
+if(document.querySelector('#comment-form')){
+  let form=document.querySelector('#comment-form');
+  function sendForm(event)
+  {
+    event.preventDefault();
+    let data = new FormData(form);
+    let ajax = new XMLHttpRequest();
+    let token = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+    ajax.open('POST', form.action);
+    ajax.setRequestHeader('X-CSRF-TOKEN',token);
+    ajax.onreadystatechange = function()
+    {
+      if(ajax.status === 200 && ajax.readyState === 4){
+        let mensagem = document.querySelector(".mensagem");
+        mensagem.innerHTML += `
+          <div class="success">
+            Comentário enviado para analise com sucesso.
+          </div>
+          `
+      }
+    }
+    ajax.send(data);
+    form.reset();
   }
+  form.addEventListener('submit',sendForm,false);
+}
+
+function enableButton() {
+  document.querySelector('.button').removeAttribute('disabled')
+  document.querySelector('.button').style.cursor = 'pointer'
 }
