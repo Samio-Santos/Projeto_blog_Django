@@ -92,10 +92,6 @@
   margin-top: 0.2rem;
 }
 
-.comments .item .resp #button-comments {
-  width: 20%;
-}
-
 .comments .item .resp .form-resp #id_resposta {
   width: 85%;
   height: 3rem;
@@ -157,6 +153,23 @@
 .item .button-resp {
   font-weight: bolder;
   cursor: pointer;
+}
+
+.item .resp #button-comments {
+  width: 15%;
+  padding: 8px;
+  border-radius: 3px;
+  border: none;
+  background-color: #6d4a76;
+  color: white;
+  cursor: pointer;
+  transition: 1s;
+  margin-bottom: 4rem;
+  outline: none;
+}
+
+.item .resp #button-comments:hover {
+  background-color: #370344;
 }
 
 /* Container para fazer um comentário com usuario */
