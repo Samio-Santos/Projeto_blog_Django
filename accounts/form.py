@@ -4,4 +4,4 @@ from django.forms import ModelForm
 class Userform(ModelForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'email', 'biografia', 'imagem')
+        fields = ('first_name', 'last_name', 'username', 'email')

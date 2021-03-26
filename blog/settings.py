@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'axes',
-] 
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -206,7 +206,6 @@ AXES_RESET_ON_SUCCESS = True
 AXES_COOLOFF_TIME = timedelta(minutes=30)
 
 AXES_LOCKOUT_URL = '/accounts/locked/'
-
 
 
 SECURE_PROXY_SSL_HEADER = None
