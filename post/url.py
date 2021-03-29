@@ -6,5 +6,5 @@ urlpatterns = [
     path('post/<int:id>', post, name='post_detalhe'),
     path('delete/<int:id>', delete_notification, name='notification_delete'),
     path('categoria/<str:categoria>', post_categoria, name='post_categoria'),
-    path('busca/', busca_post, name='busca_post')
+    path('busca/', busca_post, name='busca_post'),
 ]

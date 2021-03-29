@@ -161,7 +161,6 @@ function mostraSenha() {
 
 // Funciobalidade com Ajax e Django
 // Quando o usuario fizer um comentário este código irá excultar
-
 if(document.querySelector('#comment-form')){
   let form=document.querySelector('#comment-form');
   function sendForm(event)
@@ -189,7 +188,18 @@ if(document.querySelector('#comment-form')){
   form.addEventListener('submit',sendForm,false);
 }
 
+// Função para habilitar o botão caso o usuario preencha todo o formulario
 function enableButton() {
   document.querySelector('.button').removeAttribute('disabled')
   document.querySelector('.button').style.cursor = 'pointer'
+}
+
+// Função para pre-loader
+if (document.querySelector(".container-loader")) {
+  var loader = setInterval(function () {
+    clearInterval(loader);
+    document.querySelector(".container-loader").style.display = "none";
+    document.querySelector(".content").style.display = "inline";
+  
+  }, 800);
 }

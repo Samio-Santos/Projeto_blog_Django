@@ -14,7 +14,6 @@ import os
 from pathlib import Path
 from django.contrib.messages import constants
 from datetime import timedelta
-from django.shortcuts import redirect
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'tx82rt7q0@so==u^m9nbleolqou8*p8(4^-&q3s^%h(^xfb&8y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["samysantos10.pythonanywhere.com"]
 
@@ -205,7 +204,8 @@ AXES_RESET_ON_SUCCESS = True
 # Defini o tempo de bloqueio
 AXES_COOLOFF_TIME = timedelta(minutes=30)
 
-AXES_LOCKOUT_URL = '/accounts/locked/'
+# redireciona o usuario para este template quando bloqueado
+AXES_LOCKOUT_TEMPLATE = 'accounts/locked.html'
 
 
 

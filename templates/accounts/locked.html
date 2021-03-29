@@ -16,8 +16,8 @@
             <div class="container">
                 <h2>Usuário Bloqueado!</h2>
                 <ul>
-                    <li>Você excendeu o limite de 5 tentativas de login!</li>
-                    <li>Seu usuário está bloqueado por 30 minutos!</li>
+                    <li>Você excendeu o limite de {{ failure_limit }} tentativas de login!</li>
+                    <li>Seu usuário está bloqueado por {{ cooloff_timedelta }} minutos!</li>
                     <li>Tente novamente mais tarde!</li>
                     <li>Obrigado!</li>
                 </ul>

@@ -231,3 +231,6 @@ def delete_notification(request, id):
     notification.delete()
     messages.success(request, f'Notificação de "{notification.user_from.first_name} {notification.user_from.last_name}" excluida com sucesso!')
     return redirect(url)
+
+def page_not_404(request, exception):
+    return render(request, 'paginas_personalizadas/404.html')

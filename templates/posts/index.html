@@ -10,6 +10,8 @@
     <link rel="icon" href="{% static 'img/blog.png' %}">
     <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/animation.css' %}" />
+
 
     <link
       href="{% static 'fontawesome-free-5.13.0-web/css/fontawesome.css' %}"
@@ -26,7 +28,12 @@
   </head>
   <body>
     {% include 'parciais/menu_base.html' %}
-    <main>
+    <!-- Pre-loader -->
+    <div class="container-loader">
+      <div class="loader"></div>
+    </div>
+    <!-- Conteudo -->
+    <main class="content" style="display: none;">
       <section class="container2">
         {% if messages %}
           {% for message in messages %}
