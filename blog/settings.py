@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'axes',
-] 
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -206,7 +206,6 @@ AXES_COOLOFF_TIME = timedelta(minutes=30)
 
 # redireciona o usuario para este template quando bloqueado
 AXES_LOCKOUT_TEMPLATE = 'accounts/locked.html'
-
 
 
 SECURE_PROXY_SSL_HEADER = None
