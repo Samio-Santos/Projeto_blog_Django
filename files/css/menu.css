@@ -44,6 +44,7 @@ header {
   font-size: 20px;
   margin-left: 1rem;
   margin-top: 1.29rem;
+  color: white;
 }
 
 .container #icone-login {
@@ -55,7 +56,6 @@ header {
 }
 
 .container a {
-  color: white;
   text-decoration: none;
 }
 

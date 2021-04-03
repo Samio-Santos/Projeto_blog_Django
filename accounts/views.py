@@ -13,7 +13,7 @@ def login(request):
     senha = request.POST.get('password')
 
     user = auth.authenticate(request, username=usuario, password=senha)
-
+    
     if not user:
         messages.error(request, 'Usuário ou senha inválidos.')
         return render(request, 'accounts/login.html')

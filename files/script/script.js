@@ -41,8 +41,8 @@ window.onclick = function (e) {
 
 // Validador de senha no cadastro
 
-var myInput = document.getElementById("psw");
-var rsenha = document.getElementById('Rsenha')
+var myInput = document.getElementById("id_new_password1");
+var rsenha = document.getElementById('id_new_password2')
 
 var letter = document.getElementById("letter");
 var capital = document.getElementById("capital");

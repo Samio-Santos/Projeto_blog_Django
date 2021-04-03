@@ -77,7 +77,7 @@
               {% if comment.num_resp %}
                 <small id="{{comment.nome}}" class="button-resp" onclick="mostraDiv('{{comment.id}}', '{{comment.nome}}', '{{comment.num_resp}}')">{{comment.num_resp|plural_resposta}}</small>
               {% endif %}
-
+            
               <!-- Container para exibir respostas nos comentários -->
               <div id="{{comment.id}}" class="container-resp" style="display: none;">
                 {% for obj in resp %}

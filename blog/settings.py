@@ -14,6 +14,8 @@ import os
 from pathlib import Path
 from django.contrib.messages import constants
 from datetime import timedelta
+from django.shortcuts import redirect, render
+from archive import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -119,7 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -164,6 +165,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Configuração rede social
 AUTHENTICATION_BACKENDS = (
+    'accounts.backend.EmailUserBackend',
     'axes.backends.AxesBackend',
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.github.GithubOAuth2',
@@ -171,18 +173,29 @@ AUTHENTICATION_BACKENDS = (
 
     'django.contrib.auth.backends.ModelBackend',
 )
+#### Configurações social auth ####
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
 
 # Autenticação pelo facebook
 SOCIAL_AUTH_FACEBOOK_KEY = '414184179999238'
-SOCIAL_AUTH_FACEBOOK_SECRET = 'd68fed2d64092e2cb32bc5fadf800682'
+SOCIAL_AUTH_FACEBOOK_SECRET = SECRET_KEY_FACEBOOK
 
 # Autenticação pelo Github
 SOCIAL_AUTH_GITHUB_KEY = 'a4a0697de7ac8fb277e2'
-SOCIAL_AUTH_GITHUB_SECRET = '35585559b09ce930e09bfa9cf1327ae469766ff4'
+SOCIAL_AUTH_GITHUB_SECRET = SECRET_KEY_GITHUB
 
 # Autenticação pelo Google
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '955161584054-ocobrnmng47tj4625kk4rtsbojqbukjf.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'EOQ-7TD62FBMBmNfdwqulvgy'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = SECRET_KEY_GOOGLE
+
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -208,11 +221,20 @@ AXES_COOLOFF_TIME = timedelta(minutes=30)
 AXES_LOCKOUT_TEMPLATE = 'accounts/locked.html'
 
 
-SECURE_PROXY_SSL_HEADER = None
-SECURE_SSL_REDIRECT = None
-SESSION_COOKIE_SECURE = None
-CSRF_COOKIE_SECURE = None
+# SMTP configurações
+try:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = EMAIL
+    EMAIL_HOST_PASSWORD = PASSWORD
+    EMAIL_TIMEOUT = 60
+    DEFAULT_FROM_EMAIL = 'Blog team <noreplay@blog.com>'
+except:
+    redirect('login/')
 
+# Configuração para o ambiente de teste
 try:
     from .local_settings import *
 

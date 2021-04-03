@@ -1,3 +1,17 @@
+main .container-logado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+main .container-logado p {
+  border-radius: 5px;
+  padding: 15px;
+  background-color: rgba(255, 255, 0, 0.411);
+  font-weight: bold;
+}
+
 form {
   font-family: sans-serif;
 }
@@ -51,6 +65,7 @@ fieldset {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 2.2rem;
 }
 
 .conect img {
@@ -100,7 +115,7 @@ input[type="password"] {
 }
 
 footer {
-  position: absolute;
+  position: relative;
   bottom: 0;
   padding: 20px;
   width: 100%;
@@ -132,6 +147,10 @@ footer {
 }
 
 @media only screen and (min-device-width: 260px) and (max-device-width: 640px) {
+
+  footer {
+    position: absolute;
+  }
   .box-password {
     position: relative;
     right: 90px;
