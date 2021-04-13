@@ -1,10 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
+from accounts.models import User
 from post.models import Post
 from django.utils import timezone
 from django.conf import settings
 from notificaçoes.models import Notification
-
 from django.db.models.signals import post_save
 
 class Comentarios(models.Model):
@@ -12,7 +11,7 @@ class Comentarios(models.Model):
     email = models.EmailField()
     comentario = models.TextField()
     post_comentario = models.ForeignKey(Post, on_delete=models.CASCADE)
-    usuario_comentario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    usuario_comentario = models.ForeignKey('accounts.User', on_delete=models.CASCADE, blank=True, null=True)
     data_comentario = models.DateTimeField(default=timezone.now)
     publicado_comentario = models.BooleanField(default=False)
 
@@ -27,7 +26,7 @@ class Comentarios(models.Model):
 
 class Resposta(models.Model):
     resposta = models.TextField()
-    profile = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    profile = models.ForeignKey('accounts.User', on_delete=models.CASCADE, blank=True, null=True)
     resposta_comentario = models.ForeignKey(Comentarios, on_delete=models.CASCADE)
     data_resposta = models.DateTimeField(default=timezone.now)
     publicado_resposta = models.BooleanField(default=True)

@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from accounts.models import User
 from categorias.models import Categoria
 from django.utils import timezone
 from PIL import Image
@@ -13,7 +13,7 @@ from django.contrib import messages
 
 class Post(models.Model):
     titulo_post = models.CharField(max_length=150)
-    autor_post = models.ForeignKey(User, on_delete=models.DO_NOTHING, default=User)
+    autor_post = models.ForeignKey('accounts.User', on_delete=models.DO_NOTHING, default=User)
     data_post = models.DateTimeField(default=timezone.now)
     conteudo_post = models.TextField()
     resumo_post = models.TextField()

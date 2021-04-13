@@ -2,6 +2,8 @@ from django.urls import path
 from .views import login, cadastro, logout, perfil_usuario, locked
 from post.views import index
 from django.contrib.auth import views as auth_views
+from accounts.form import EmailValidationPassword
+
 
 urlpatterns = [
     path('login/', login, name='login'),
@@ -14,7 +16,8 @@ urlpatterns = [
     path('reset_password/', 
     auth_views.PasswordResetView.as_view(
         template_name='accounts/password_reset.html',
-        email_template_name='accounts/emai_template.html'
+        email_template_name='accounts/email_template.html',
+        form_class=EmailValidationPassword
         ), 
     name='reset_password'),
 

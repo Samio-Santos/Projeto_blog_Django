@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 from django.contrib.messages import constants
 from datetime import timedelta
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from archive import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'tx82rt7q0@so==u^m9nbleolqou8*p8(4^-&q3s^%h(^xfb&8y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["samysantos10.pythonanywhere.com"]
 
@@ -53,6 +53,10 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'axes',
 ]
+
+# Customização do modelo de usuario Django
+AUTH_USER_MODEL = 'accounts.User'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -102,7 +106,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -144,6 +147,7 @@ STATIC_ROOT = '/home/samysantos10/Projeto_blog_Django/static'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "files"),)
 
+
 # Para o usuario poder adicionar mídias, fazer as configurações abaixo.
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join (BASE_DIR, 'midias/')
@@ -179,9 +183,12 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_uid',
     'social_core.pipeline.social_auth.social_user',
     'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.user.create_user',
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
+    'accounts.social_auth.sucesso'
 )
 
 # Autenticação pelo facebook
@@ -196,10 +203,8 @@ SOCIAL_AUTH_GITHUB_SECRET = SECRET_KEY_GITHUB
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '955161584054-ocobrnmng47tj4625kk4rtsbojqbukjf.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = SECRET_KEY_GOOGLE
 
-
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
-
+LOGOUt_REDIRECT_URL = '/'
 
 ##### CONFIGURAÇÕES DO DO AXE #####
 
@@ -230,13 +235,14 @@ try:
     EMAIL_HOST_USER = EMAIL
     EMAIL_HOST_PASSWORD = PASSWORD
     EMAIL_TIMEOUT = 60
-    DEFAULT_FROM_EMAIL = 'Blog team <noreplay@blog.com>'
+    DEFAULT_FROM_EMAIL = 'Blog team'
+
 except:
     redirect('login/')
 
+
 # Configuração para o ambiente de teste
 try:
-    from .local_settings import *
-
+    from blog.local_settings import *
 except:
     pass

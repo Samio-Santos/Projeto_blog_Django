@@ -69,7 +69,7 @@ fieldset {
 }
 
 .conect img {
-  padding-left: 1rem;
+  padding-left: .7rem;
   height: 2rem;
 }
 
@@ -96,7 +96,6 @@ form i {
 }
 
 form h5 {
-  padding-left: 1rem;
   margin-bottom: 0.5rem;
   text-align: center;
 }
@@ -117,7 +116,7 @@ input[type="password"] {
 footer {
   position: relative;
   bottom: 0;
-  padding: 20px;
+  padding: 22px;
   width: 100%;
   background-color: #6d4a76;
   color: white;

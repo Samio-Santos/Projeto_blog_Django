@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q, Case, Count, When
 from django.contrib import messages
 from comentarios.forms import FormComentario, FormResposta
-from django.contrib.auth.models import User
+from accounts.models import User
 from notificaçoes.models import Notification
 
 from django.http import JsonResponse

@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Perfil</title>
+    <link rel="icon" href="{% static 'img/blog.png' %}">
     <link rel="stylesheet" href="{% static 'css_accounts/perfil_user.css' %}" />
     <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
   </head>
@@ -51,11 +52,7 @@
           />
           {% endif %}
         </div>
-
-        <div class="input-block">
-          <label for="{{ form.id_last_name_for_label }}">Usuario:</label>
-          {{ form.username }}
-        </div>
+        
         <div class="input-block">
           <label for="{{ form.id_first_name_for_label }}">Nome:</label>
           {{ form.first_name }}
