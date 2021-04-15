@@ -2,6 +2,7 @@ from django.contrib.auth.backends import BaseBackend
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 
+# Script para o usuario logan com seu e-mail ao inves do username
 class EmailUserBackend(BaseBackend):
     def authenticate(self, request, username=None, password=None):
         User = get_user_model()

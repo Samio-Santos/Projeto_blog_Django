@@ -1,9 +1,4 @@
-# Django stuff:
-*.log
+__pycache__/
 local_settings.py
 archive.py
-db.sqlite3-journal
-/Projeto_blog_Django/.vscode/
-/Projeto_blog_Django/.venv/
-/Projeto_blog_Django/__pycache__/
-
+.vscode/

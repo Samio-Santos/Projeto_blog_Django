@@ -59,16 +59,14 @@ form {
   outline: none;
 }
 
-textarea,
-select {
+textarea {
   width: 60%;
   outline: none;
   resize: vertical;
 }
 
 .input-block textarea:focus,
-input:focus,
-select:focus {
+input:focus{
   border: 1.5px solid #6d4a76;
 }
 
@@ -151,7 +149,6 @@ button:hover {
   }
 
   .input-block input,
-  select,
   textarea {
     width: 70%;
     outline: none;

@@ -32,51 +32,53 @@
         method="POST"
         enctype="multipart/form-data"
       >
-        {% csrf_token %} {% if messages %} {% for message in messages %}
-        <div class="{{ message.tags }}" role="alert">{{ message }}</div>
-        {% endfor %} {% endif %}
+        {% csrf_token %} 
+        {% if messages %} 
+          {% for message in messages %}
+            <div class="{{ message.tags }}" role="alert">{{ message }}</div>
+          {% endfor %} {% endif %}
 
-        <div class="img-block">
-          {% if user.imagem %}
-          <img
-            class="img-perfil"
-            src="{{ user.imagem.url }}"
-            alt="foto-perfil"
-          />
+          <div class="img-block">
+            {% if user.imagem %}
+              <img
+                class="img-perfil"
+                src="{{ user.imagem.url }}"
+                alt="foto-perfil"
+              />
 
-          {% else %}
-          <img
-            class="img-perfil"
-            src="{% static 'img/profile-user.png' %}"
-            alt="foto-perfil"
-          />
+            {% else %}
+              <img
+                class="img-perfil"
+                src="{% static 'img/profile-user.png' %}"
+                alt="foto-perfil"
+              />
           {% endif %}
         </div>
         
         <div class="input-block">
-          <label for="{{ form.id_first_name_for_label }}">Nome:</label>
+          <label for="id_first_name">Nome:</label>
           {{ form.first_name }}
         </div>
 
         <div class="input-block">
-          <label for="{{ form.id_last_name_for_label }}">Sobreome:</label>
+          <label for="id_last_name">Sobreome:</label>
           {{ form.last_name }}
         </div>
 
 
         <div class="input-block">
-          <label for="{{ form.id_email }}">E-mail:</label>
+          <label for="id_email">E-mail:</label>
           {{ form.email }}
         </div>
 
         <div class="input-block">
-          <label for="{{ form.id_biografia_for_label }}">Biografia:</label>
+          <label for="id_biografia">Biografia:</label>
           {{ form.biografia }}
         </div>
 
         <div class="input-block-img">
           <div>
-            <label for="{{ form.id_imagem_for_label }}">Foto Perfil:</label>
+            <label for="id_imagem">Foto Perfil:</label>
             {{ form.imagem }}
           </div>
         </div>
