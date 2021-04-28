@@ -24,8 +24,34 @@ input#check[type="checkbox"] {
   position: fixed;
 }
 
-img#menu {
-  width: 2rem;
+/* Transforma o MENU Hamburgue em X */
+.menu-block .container-closed {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.menu-block .container-closed .bar1,
+.menu-block .container-closed .bar2,
+.menu-block .container-closed .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {
+  opacity: 0;
+}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
 }
 
 /*Menu */
@@ -92,7 +118,7 @@ header {
   margin-right: 3rem;
   font-family: sans-serif;
   position: relative;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .container-img .search-img {
@@ -112,7 +138,7 @@ header {
   background-color: red;
 }
 .container-img .notification {
-  margin-right: .5rem;
+  margin-right: 0.5rem;
   height: 1.7rem;
 }
 
@@ -299,7 +325,7 @@ header {
   width: 100%;
   font-weight: bold;
   font-size: 15px;
-  
+
   background-color: transparent;
   border: none;
   color: white;
@@ -312,7 +338,6 @@ header {
   float: right;
   height: 15px;
 }
-
 
 /* Campo de pesquisa, login e cadastro */
 
@@ -378,10 +403,10 @@ footer {
 @media only screen and (min-device-width: 360px) and (max-device-width: 640px) {
   .container-img .search-img {
     display: inline-block;
-    margin-right: .5rem;
+    margin-right: 0.5rem;
     height: 1.6rem;
   }
-  
+
   .container h1 {
     width: 60px;
     word-wrap: break-word;
@@ -399,13 +424,14 @@ footer {
     height: initial;
   }
 
+  .menu-block .container-closed {
+    display: none;
+  }
+  
   .container h1 {
     min-width: 150px;
   }
 
-  img#menu {
-    display: none;
-  }
 
   #container-dropdown {
     display: block;

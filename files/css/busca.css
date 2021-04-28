@@ -25,10 +25,12 @@
   font-size: 30px;
 }
 
-.flex-container .block-text small { 
+.flex-container .block-text small,
+.flex-container .block-text div img { 
   position: relative;
   top: 7rem;
 }
+
 .cards {
   height: 100vh;
   border: 0.3px solid #6c757d;

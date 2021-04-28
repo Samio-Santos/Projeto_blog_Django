@@ -2,7 +2,11 @@
 {% if not user.is_authenticated %}
     <div class="menu-block">
         <label for="check">
-            <img id="menu" src="{% static 'img/menu.png' %}" alt="Icone menu" />
+          <div class="container-closed" onclick="closedFunction(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+          </div>
         </label>
     </div>
 
@@ -15,6 +19,7 @@
         <h1>Blog</h1>
       </a>
     </div>
+    
     {% if not user.is_authenticated %}
     <nav id="container-dropdown">
       <ul>

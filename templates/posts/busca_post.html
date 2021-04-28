@@ -58,7 +58,10 @@
             {% endfor %} 
           {% else %}
             <div class="block-text">
-              <small>Nem um post  "{{request.GET.termo}}" encontrado!</small>
+              <div>
+                <img src="{% static 'img/mecanismo-de-busca.png' %}" alt="Icone-busca">
+              </div>
+              <small>Ops: Nem um post  "{{request.GET.termo}}" encontrado!</small>
             </div>
           {% endif %}
         </article>

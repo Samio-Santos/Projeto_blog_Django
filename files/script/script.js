@@ -1,3 +1,9 @@
+// Função para icone do menu se tranformar no X
+
+function closedFunction(x) {
+  x.classList.toggle("change");
+}
+
 /* Quando o usuário clica no botão,
 alternar entre ocultar e mostrar o conteúdo suspenso  */
 function myFunction() {

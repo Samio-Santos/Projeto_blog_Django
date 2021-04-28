@@ -2,9 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.core.validators import validate_email
 from .models import User
-from django.contrib.auth.decorators import login_required
 from .form import Userform
-from social_django.models import UserSocialAuth
 from django.contrib.auth import get_user_model
 
 
