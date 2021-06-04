@@ -59,6 +59,7 @@ class Post(models.Model):
     def post_notification(sender, instance, created, **kwargs):
         posts = instance
         post_autor = posts.autor_post
+        titulo = posts.titulo_post
         if created:
             if posts.publicado_post == True:
                 for users in User.objects.all():
