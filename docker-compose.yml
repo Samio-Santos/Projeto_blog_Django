@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+    web:
+      build: .
+
+      volumes:
+        - .:/app
+
+      ports:
+        - "8000:8000"
+
+      image: blog:app
+
+      container_name: blog_container
+
+      restart: always
+
+      command: python manage.py runserver 0.0.0.0:8000
+      
+      depends_on: 
+        - db 
+        
+    db:
+      image: mysql:8.0
+
+      ports: 
+        - "3306:3306"    
+               
+      environment: 
+       MYSQL_DATABASE: 'django_blog'
+       MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+    
+      container_name: mysql_container
+
+      restart: always
+        
+      volumes:
+        - mysql_data:/var/lib/mysql
+                    
+volumes:
+  mysql_data:

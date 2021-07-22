@@ -30,7 +30,7 @@ SECRET_KEY = 'tx82rt7q0@so==u^m9nbleolqou8*p8(4^-&q3s^%h(^xfb&8y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["samysantos10.pythonanywhere.com"]
+ALLOWED_HOSTS = ["samysantos10.pythonanywhere.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -98,10 +98,10 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 DATABASES = {
   'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'base de dados',
-        'HOST': '',
+        'NAME': 'django_blog',
+        'HOST': 'mysql_container',
         'PORT': '3306',
-        'USER': '',
+        'USER': 'root',
         'PASSWORD': '',
     }
 }
@@ -151,6 +151,9 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "files"),)
 # Para o usuario poder adicionar mídias, fazer as configurações abaixo.
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join (BASE_DIR, 'midias/')
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Messages
 # Os alertas vão na classe da tag no template
@@ -241,7 +244,6 @@ except:
     redirect('login/')
 
 
-# Configuração para o ambiente de teste
 try:
     from blog.local_settings import *
 except:
